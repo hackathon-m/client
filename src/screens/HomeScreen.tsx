@@ -49,9 +49,9 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <View style={styles.iconStatic}>
           <HomeStatistic />
 
-          <View style={styles.piechart}>
+          {/* <View style={styles.piechart}>
             <PieCharts width={80} height={80} victoryPercentage={0.7} />
-          </View>
+          </View> */}
         </View>
         <Pressable>
           <MakeMyBattle onPress={toCreateGiftScreen} />
