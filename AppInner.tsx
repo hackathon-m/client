@@ -14,10 +14,9 @@ import QuicknessGameScreen from 'src/screens/QuicknessGameScreen';
 
 import { RootStackParamList } from '@type/params/rootStack';
 import { LoginStackParamList } from '@type/params/loginStack';
+import MakeBattleScreen from 'src/screens/MakeBattleScreen';
 
 import CreateGiftScreen from 'src/screens/CreateGiftScreen';
-
-import MakeBattleScreen from 'src/screens/MakeBattleScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();

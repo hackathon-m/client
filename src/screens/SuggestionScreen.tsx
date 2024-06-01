@@ -107,6 +107,12 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
         ))}
       </ScrollView>
 
+      <View style={styles.categoryContainer}>
+        {categoryList.map((category) => (
+          <CategoryItem key={category} item={category} />
+        ))}
+      </View>
+
       <Text style={styles.title}>Battle</Text>
 
       {/* <FlatList
@@ -237,6 +243,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     alignSelf: 'center',
+
     alignItems: 'center',
   },
   addButtonText: {
