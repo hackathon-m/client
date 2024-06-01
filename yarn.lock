@@ -2946,6 +2946,11 @@ http-errors@2.0.0:
 human-signals@^2.1.0:
   version "2.1.0"
 
+husky@^9.0.11:
+  version "9.0.11"
+  resolved "https://registry.npmjs.org/husky/-/husky-9.0.11.tgz"
+  integrity sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==
+
 iconv-lite@^0.6.2:
   version "0.6.3"
   dependencies:
