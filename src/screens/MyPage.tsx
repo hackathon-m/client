@@ -6,7 +6,7 @@ import Colors from 'src/constants/Colors';
 
 import TopNav from '@components/TopNav';
 
-import { HomeScreenProps } from '@type/params/loginStack';
+import { MyPageScreenProps } from '@type/params/loginStack';
 
 import Sword from '@assets/images/Sword.svg';
 import Coupon from '@assets/images/Coupon.svg';
@@ -14,7 +14,7 @@ import UserCode from '@assets/images/UserCoode.svg';
 import CoinStack from '@assets/images/CoinStack.svg';
 import Percentage from '@assets/images/Percentage.svg';
 
-const MyPageScreen = ({ navigation }: HomeScreenProps) => {
+const MyPageScreen = ({ navigation }: MyPageScreenProps) => {
   // 등록한 기프티콘 클릭
   const toGiftArchiveScreen = () => {
     navigation.navigate('GiftArchiveScreen');

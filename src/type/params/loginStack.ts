@@ -14,13 +14,13 @@ export type LoginStackParamList = {
   MyPageScreen: undefined;
   HomeScreen: undefined;
   CreateGameScreen: undefined;
-
+  GiftArchiveScreen: undefined;
   QuicknessGameScreen: undefined;
   BallonGameScreen: undefined;
   MakeBattleScreen: undefined;
   TimerGameScreen: undefined;
   CreateGiftScreen: undefined;
-  GiftArchiveScreen: undefined;
+  AlertScreen: undefined;
 };
 
 export type MainScreenProps = NativeStackScreenProps<LoginStackParamList, 'MainScreen'>;
@@ -35,3 +35,8 @@ export type TimerGameScreenScreenProps = NativeStackScreenProps<
   'TimerGameScreen'
 >;
 export type CreateGiftScreenProps = NativeStackScreenProps<LoginStackParamList, 'CreateGiftScreen'>;
+export type AlertScreenProps = NativeStackScreenProps<LoginStackParamList, 'AlertScreen'>;
+export type GiftArchiveScreenProps = NativeStackScreenProps<
+  LoginStackParamList,
+  'GiftArchiveScreen'
+>;
