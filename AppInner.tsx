@@ -5,6 +5,8 @@ import MyPageScreen from 'src/screens/MyPage';
 import MainScreen from 'src/screens/MainScreen';
 import HomeScreen from 'src/screens/HomeScreen';
 import MyCouponScreen from 'src/screens/MyCoupon';
+import AlertScreen from 'src/screens/AlarmScreen';
+import ChooseGiftScreen from 'src/screens/ChooseGift';
 import LandingScreen from 'src/screens/LandingScreen';
 import TimerGameScreen from 'src/screens/TimerGameScreen';
 import CreateGameScreen from 'src/screens/CreateGameScreen';
@@ -15,10 +17,9 @@ import CreateGiftScreen from 'src/screens/CreateGiftScreen';
 import GiftArchiveScreen from 'src/screens/GiftArchiveScreen';
 import QuicknessGameScreen from 'src/screens/QuicknessGameScreen';
 import BattleLoadingScreen from 'src/screens/BattleLoadingScreen';
+
 import { RootStackParamList } from '@type/params/rootStack';
 import { LoginStackParamList } from '@type/params/loginStack';
-
-import AlertScreen from 'src/screens/AlarmScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
@@ -51,6 +52,7 @@ function AppInner() {
       <LogInStack.Screen name="BattleLoadingScreen" component={BattleLoadingScreen} />
 
       <LogInStack.Screen name="AlertScreen" component={AlertScreen} />
+      <LogInStack.Screen name="ChooseGiftScreen" component={ChooseGiftScreen} />
     </LogInStack.Navigator>
   ) : (
     <RootStack.Navigator

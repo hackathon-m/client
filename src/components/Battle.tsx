@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BlurView } from '@react-native-community/blur';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, Modal, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Colors from 'src/constants/Colors';
@@ -36,6 +37,7 @@ const BattleModal = ({ kind }: { kind: string }) => {
 };
 
 const BattleComponent = ({ closeModal, kind }: { closeModal: () => void; kind: string }) => {
+  const navigation = useNavigation();
   const getGameContent = () => {
     switch (kind) {
       case 'balloon':
@@ -58,6 +60,12 @@ const BattleComponent = ({ closeModal, kind }: { closeModal: () => void; kind: s
     }
   };
 
+  // 수락버튼 누르면 ChooseGift페이지로 이동
+  const accessToChooseGift = () => {
+    navigation.navigate('ChooseGiftScreen');
+    closeModal();
+  };
+
   const { image, text } = getGameContent();
 
   return (
@@ -70,7 +78,7 @@ const BattleComponent = ({ closeModal, kind }: { closeModal: () => void; kind: s
           <Pressable onPress={closeModal} style={styles.declineButton}>
             <Text style={styles.declineButtonText}>거절</Text>
           </Pressable>
-          <Pressable onPress={closeModal} style={styles.acceptButton}>
+          <Pressable onPress={accessToChooseGift} style={styles.acceptButton}>
             <Text style={styles.acceptButtonText}>수락</Text>
           </Pressable>
         </View>
