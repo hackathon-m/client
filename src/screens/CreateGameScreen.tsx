@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, StatusBar, TextInput, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, StatusBar, TextInput, Pressable, StyleSheet } from 'react-native';
+
+import Colors from 'src/constants/Colors';
+
+import TopNav from '@components/TopNav';
+
 import { CreateGameScreenProps } from '@type/params/loginStack';
 
 import GameLogo from '@assets/images/GameLogo.svg';
-import GameLogoLine from '@assets/images/GameLogoLine.svg';
 import CoinStack from '@assets/images/CoinStack.svg';
+import GameLogoLine from '@assets/images/GameLogoLine.svg';
 
 const games = [
   { id: 1, name: '10초를 맞춰라' },
@@ -16,11 +21,18 @@ const games = [
 const CreateGameScreen = ({ navigation }: CreateGameScreenProps) => {
   const [selectedGame, setSelectedGame] = useState<number>(0);
 
-  console.log(navigation);
+  // 게임방 만들기 클릭 시
+  const toCreateGameScreen = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainScreen' }],
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
+      <TopNav />
+      <StatusBar backgroundColor="#16181B" barStyle={'light-content'} />
 
       {/* 게임 로고 생성 */}
       <View style={styles.logoContainer}>
@@ -87,6 +99,7 @@ const CreateGameScreen = ({ navigation }: CreateGameScreenProps) => {
           <View style={{ flex: 1 }} />
 
           <Pressable
+            onPress={toCreateGameScreen}
             style={{
               borderWidth: 1,
               backgroundColor: 'white',
@@ -113,13 +126,14 @@ const CreateGameScreen = ({ navigation }: CreateGameScreenProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#161B18',
+    backgroundColor: Colors.BackgroundBlack,
   },
 
   logoContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    paddingTop: 44,
   },
   gameLogo: {
     marginHorizontal: 20,

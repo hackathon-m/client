@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, Pressable, View, StatusBar, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CouponBoxContainer from '@components/CouponBox';
-import TopNav from '@components/TopNav';
+import { Text, View, Image, Pressable, StatusBar, StyleSheet, ScrollView } from 'react-native';
+
 import Colors from 'src/constants/Colors';
+
+import TopNav from '@components/TopNav';
+import CouponBoxContainer from '@components/CouponBox';
+
 import { MakeBattleScreenProps } from '@type/params/loginStack';
+
+import GameLogo from '@assets/images/GameLogo.svg';
+import GameLogoLine from '@assets/images/GameLogoLine.svg';
 
 const MakeBattleScreen = ({ navigation }: MakeBattleScreenProps) => {
   const [selectedCouponIndex, setSelectedCouponIndex] = useState(null);
@@ -28,15 +34,22 @@ const MakeBattleScreen = ({ navigation }: MakeBattleScreenProps) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
-      <TopNav />
-      <ScrollView style={{ marginBottom: 20 }}>
+      <ScrollView style={{ paddingBottom: 100 }}>
+        <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
+        <TopNav />
+
+        {/* 게임 로고 생성 */}
+        <View style={styles.logoContainer}>
+          <GameLogo style={styles.gameLogo} />
+          <GameLogoLine />
+        </View>
+
         <View style={styles.titleContainer}>
           <Image source={require('../assets/images/Coupon.png')} />
           <Text style={styles.couponSelect}>기프티콘 선택</Text>
         </View>
 
-        <View style={{ paddingHorizontal: 20 }}>
+        <View style={{ marginHorizontal: 20 }}>
           <View style={styles.couponContainer}>
             {couponList.map((coupon, index) => (
               <Pressable
@@ -49,6 +62,7 @@ const MakeBattleScreen = ({ navigation }: MakeBattleScreenProps) => {
               >
                 {selectedCouponIndex === index && (
                   <View style={styles.selectedTextContainer}>
+                    <Text style={styles.selectedText}>🔥</Text>
                     <Text style={styles.selectedText}>장전완료</Text>
                   </View>
                 )}
@@ -91,12 +105,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 15,
-    paddingHorizontal: 45,
+    paddingHorizontal: 30,
+    marginTop: 20,
+  },
+  logoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 44,
+  },
+  gameLogo: {
+    marginHorizontal: 20,
   },
   couponSelect: {
     color: 'white',
     fontSize: 16,
-    marginLeft: 3,
+    fontFamily: 'Pretendard-Bold',
   },
   selectedTextContainer: {
     position: 'absolute',
@@ -107,11 +131,14 @@ const styles = StyleSheet.create({
   selectedText: {
     color: 'white',
     fontSize: 16,
+    marginBottom: 5,
+    fontFamily: 'Pretendard-Bold',
   },
   couponContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    paddingHorizontal: 10,
   },
   buttonContainer: {
     width: 143,
@@ -138,31 +165,31 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 45,
+    paddingHorizontal: 30,
     paddingTop: 15,
     paddingBottom: 30,
     backgroundColor: Colors.BackgroundBlack,
   },
   backButton: {
     backgroundColor: '#222324',
-    width: 93,
+    width: 130,
     height: 45,
     borderRadius: 15,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  backText: { color: 'white', fontSize: 16 },
+  backText: { color: 'white', fontSize: 16, fontFamily: 'Pretendard-Bold' },
   nextButton: {
     backgroundColor: 'white',
-    width: 187,
+    width: 170,
     height: 45,
     borderRadius: 15,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  nextText: { color: '#9E00FF', fontSize: 16 },
+  nextText: { color: '#9E00FF', fontSize: 16, fontFamily: 'Pretendard-Bold' },
 });
 
 export default MakeBattleScreen;

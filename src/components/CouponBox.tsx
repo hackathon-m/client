@@ -43,10 +43,14 @@ const styles = StyleSheet.create({
   couponName: {
     color: 'white',
     fontSize: 16,
+    marginTop: 5,
+    marginBottom: 5,
+    fontFamily: 'Pretendard-Bold',
   },
   couponPrice: {
     color: 'white',
     fontSize: 14,
+    fontFamily: 'Pretendard-Light',
   },
 });
 
