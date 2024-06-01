@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Text,
@@ -24,13 +24,13 @@ import IconAdd from '@assets/images/IconAdd.svg';
 import GiftBox from '@assets/images/GiftBox.svg';
 import Mirror from '@assets/images/HandMirror.svg';
 import CoinStack from '@assets/images/CoinStack.svg';
+import axiosInstance from '@axios/axios.instance';
 
 interface Item {
   id: string;
   title: string;
-  descrip: string;
-  game: string;
-  price: string;
+  field: string;
+  gameType: string;
   category: string;
 }
 
@@ -38,43 +38,27 @@ interface CategoryItemProps {
   item: string;
 }
 
-const dummyData: Item[] = [
-  {
-    id: '1',
-    title: '스타벅스',
-    descrip: '4,500원 부터 들어와~',
-    game: '풍선터트리기',
-    price: '4,300원',
-    category: 'Cafe',
-  },
-  {
-    id: '2',
-    title: '스타벅스',
-    descrip: '4,500원 부터 들어와~',
-    game: '풍선터트리기',
-    price: '4,300원',
-    category: 'Food',
-  },
-  {
-    id: '3',
-    title: '스타벅스',
-    descrip: '4,500원 부터 들어와~',
-    game: '풍선터트리기',
-    price: '4,300원',
-    category: 'Make up',
-  },
-  {
-    id: '4',
-    title: '스타벅스',
-    descrip: '4,500원 부터 들어와~',
-    game: '풍선터트리기',
-    price: '4,300원',
-    category: 'etc',
-  },
-];
+const gameList = ['10초를 맞춰라!', '풍선 터뜨리기', '누가누가 빠르나'];
+
 
 const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
   const [showBattleModal, setShowBattleModal] = useState(false);
+
+  const categoryList: string[] = ['All', 'Food', 'Cafe', 'Make up'];
+  const categoryList2: string[] = ['ALL', 'FOOD', 'CAFE', 'MAKEUP'];
+  const [selectedCategory, setSelectedCategory] = useState<string | null>('All');
+
+  const [allList, setAllList] = useState<Item[]>([]);
+  const [filterList, setFilterList] = useState<Item[]>([]);
+  
+  useEffect(() => {
+    (async () => {
+      const response = await axiosInstance.get('/api/v1/rooms');
+      console.log(response.data);
+      setAllList(response.data);
+      setFilterList(response.data);
+    })();
+  }, []);
 
   const openBattleModal = () => {
     setShowBattleModal(true);
@@ -83,11 +67,6 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
   const closeBattleModal = () => {
     setShowBattleModal(false);
   };
-  const categoryList: string[] = ['All', 'Food', 'Cafe', 'Make up'];
-  const [selectedCategory, setSelectedCategory] = useState<string | null>('All');
-
-  const allList: Item[] = dummyData;
-  const [filterList, setFilterList] = useState<Item[]>(dummyData);
 
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
@@ -95,7 +74,10 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
     if (category === 'All') {
       setFilterList(allList);
     } else {
-      const filteredData = allList.filter((item) => item.category === category);
+      const index = categoryList.indexOf(category);
+      const filt = categoryList2[index];
+
+      const filteredData = allList.filter((item) => item.category === filt);
       setFilterList(filteredData);
     }
   };
@@ -111,20 +93,23 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
 
   const renderItem = ({ item }: { item: Item }) => (
     <View style={BattleStyles.itemContainer}>
-      {item.category === 'Cafe' && <Coffe style={BattleStyles.icon} />}
-      {item.category === 'Food' && <Food style={BattleStyles.food} />}
-      {item.category === 'Make up' && <Mirror style={BattleStyles.icon} />}
-      {item.category === 'etc' && <GiftBox style={BattleStyles.icon} />}
+      {item.category === 'CAFE' && <Coffe style={BattleStyles.icon} />}
+      {item.category === 'FOOD' && <Food style={BattleStyles.food} />}
+      {item.category === 'MAKEUP' && <Mirror style={BattleStyles.icon} />}
+      {item.category === 'ETC' && <GiftBox style={BattleStyles.icon} />}
 
       <View>
         <Text style={BattleStyles.title}>{item.title}</Text>
-        <Text style={BattleStyles.descrip}>{item.descrip}</Text>
+        <Text style={BattleStyles.descrip}>{item.field}부터 들어와~</Text>
 
         <View style={BattleStyles.row}>
-          <Text style={BattleStyles.game}>{item.game}</Text>
+          {item.gameType=='GAME1' && <Text style={BattleStyles.game}>{gameList[0]}</Text>}
+          {item.gameType=='GAME2' && <Text style={BattleStyles.game}>{gameList[1]}</Text>}
+          {item.gameType=='GAME3' && <Text style={BattleStyles.game}>{gameList[2]}</Text>}
+
           <View style={BattleStyles.row}>
             <CoinStack />
-            <Text style={BattleStyles.descrip}>{item.price}</Text>
+            <Text style={BattleStyles.descrip}>{item.field}원</Text>
           </View>
         </View>
         {/* timer, quickness, balloon 중 선택*/}
@@ -162,6 +147,8 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
       </View>
 
       <Text style={styles.title}>Battle</Text>
+      
+      {filterList.length == 0 && <Text style={styles.txtbox}>배틀을 만들어 주세요!</Text>}
 
       <FlatList
         style={styles.pad}
@@ -312,6 +299,11 @@ const styles = StyleSheet.create({
     color: Colors.white,
     paddingLeft: 10,
   },
+  txtbox: {
+    color: Colors.white,
+    alignItems: 'center',
+    marginHorizontal: 'auto',
+  }
 });
 
 export default SuggestionScreen;
