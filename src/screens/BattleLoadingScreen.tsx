@@ -1,6 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View, Image, StatusBar, Animated } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View, Image, Animated, StatusBar, StyleSheet } from 'react-native';
+
+import Colors from 'src/constants/Colors';
+
 import { BattleLoadingScreenProps } from '@type/params/loginStack';
 
 const BattleLoadingScreen = ({ navigation }: BattleLoadingScreenProps) => {
@@ -17,9 +20,17 @@ const BattleLoadingScreen = ({ navigation }: BattleLoadingScreenProps) => {
   }, [spinValue]);
 
   useEffect(() => {
+    // 3초 있다가 로딩 끄기
     if (!isLoading) {
       const timer = setTimeout(() => {
-        navigation.navigate('TimerGameScreen');
+        navigation.navigate('QuicknessGameScreen');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        navigation.navigate('QuicknessGameScreen');
       }, 3000);
 
       return () => clearTimeout(timer);
@@ -62,7 +73,7 @@ const BattleLoadingScreen = ({ navigation }: BattleLoadingScreenProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#161B18',
+    backgroundColor: Colors.BackgroundBlack,
   },
 
   loadingContainer: {

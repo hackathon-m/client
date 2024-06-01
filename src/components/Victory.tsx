@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Image, View, Animated, Easing, Text, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, Easing, Animated, Pressable } from 'react-native';
 
 import VicoryCrown from '@assets/images/VictoryCrown.svg';
 
 interface VictoryComponentProps {
   closeVictory: () => void;
+  reactionTime: number;
 }
 
-const VictoryComponent: React.FC<VictoryComponentProps> = ({ closeVictory }) => {
+const VictoryComponent: React.FC<VictoryComponentProps> = ({ closeVictory, reactionTime }) => {
   const [bomb, setBomb] = useState<boolean>(false);
   const [coin, setCoin] = useState<boolean>(false);
   const [scaleAnim] = useState(new Animated.Value(0)); // 애니메이션을 위한 상태 추가
   const [opacityAnim] = useState(new Animated.Value(0)); // 애니메이션을 위한 상태 추가
 
+  console.log('reactionTime', reactionTime);
   useEffect(() => {
     setTimeout(() => {
       setCoin(true);
@@ -123,7 +125,9 @@ const VictoryComponent: React.FC<VictoryComponentProps> = ({ closeVictory }) => 
               <Text style={{ color: '#9E00FF', fontWeight: 'bold' }}>나</Text>
             </View>
 
-            <Text style={{ color: 'white', fontWeight: 'bold', marginTop: 16 }}>2:49</Text>
+            <Text style={{ color: 'white', fontWeight: 'bold', marginTop: 16 }}>
+              {reactionTime}ms
+            </Text>
           </View>
 
           <View style={{ display: 'flex', alignItems: 'center' }}>
@@ -138,7 +142,7 @@ const VictoryComponent: React.FC<VictoryComponentProps> = ({ closeVictory }) => 
               <Text style={{ color: 'white', fontWeight: 'bold' }}>상대방</Text>
             </View>
 
-            <Text style={{ color: 'white', fontWeight: 'bold', marginTop: 16 }}>2:49</Text>
+            <Text style={{ color: 'white', fontWeight: 'bold', marginTop: 16 }}>1345ms</Text>
           </View>
         </View>
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
+
 import GiftCard from './GiftCard';
 
 interface VictoryGiftCardComponentProps {
@@ -23,7 +24,12 @@ const VictoryGiftCardComponent: React.FC<VictoryGiftCardComponentProps> = ({ toM
         <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>축하합니다!</Text>
       </View>
 
-      <GiftCard name="스트로베리" expiration="2022.02.02" price="12000" />
+      <GiftCard
+        name="굽네 고추바사삭"
+        expiration="2022.02.02"
+        price="25000"
+        imgurl="https://image-model-demo.s3.ap-northeast-2.amazonaws.com/upload/b8fe3b1b-78d3-4b0c-9dd8-eba22f79477d"
+      />
 
       <Pressable
         onPress={toMainScreen}
