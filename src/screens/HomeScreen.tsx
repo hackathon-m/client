@@ -7,6 +7,8 @@ import Colors from 'src/constants/Colors';
 import TopNav from '@components/TopNav';
 import PieCharts from '@components/PieChart';
 
+import { HomeScreenProps } from '@type/params/loginStack';
+
 import HomeMent from '@assets/images/HomeMent.svg';
 import MyTicket from '@assets/images/MyTicket.svg';
 import HomeEmpty from '@assets/images/HomeEmpty.svg';
@@ -14,11 +16,18 @@ import IconEating from '@assets/images/IconEating.svg';
 import HomeBrowser from '@assets/images/HomeBrowser.svg';
 import MakeMyBattle from '@assets/images/MakeMyBattle.svg';
 import HomeStatistic from '@assets/images/HomeStatistic.svg';
-import { HomeScreenProps } from '@type/params/loginStack';
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const toCreateGiftScreen = () => {
-    navigation.navigate('CreateGiftScreen');
+    navigation.navigate('MakeBattleScreen');
+  };
+  // browse 클릭
+  const toBrowseScreen = () => {
+    navigation.navigate('SuggestionScreen');
+  };
+  // my ticket 클릭
+  const toMyTicketScreen = () => {
+    navigation.navigate('GiftArchiveScreen');
   };
 
   return (
@@ -34,7 +43,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
         <HomeMent />
       </View>
       <View style={styles.bodyroute}>
-        <Pressable>
+        <Pressable onPress={toBrowseScreen}>
           <HomeBrowser />
         </Pressable>
         <View style={styles.iconStatic}>
@@ -51,7 +60,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
           <HomeEmpty />
         </Pressable>
         <View style={styles.iconTicket}>
-          <Pressable>
+          <Pressable onPress={toMyTicketScreen}>
             <MyTicket />
           </Pressable>
         </View>

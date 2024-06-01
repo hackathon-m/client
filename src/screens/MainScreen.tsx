@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import MyPageScreen from './MyPage';
@@ -6,19 +7,16 @@ import HomeScreen from './HomeScreen';
 import MyCouponScreen from './MyCoupon';
 import SuggestionScreen from './SuggestionScreen';
 
-
-
 import { TabNavigatorParamList } from '@type/params/loginStack';
 
 import HomeNavigation from '@assets/images/HomeNavigation.svg';
-import HomeNavigationSelected from '@assets/images/HomeNavigationSelected.svg';
 import BattleNavigation from '@assets/images/BattleNavigation.svg';
-import BattleNavigationSelected from '@assets/images/BattleNavigationSelected.svg';
-import SuggestionNavigation from '@assets/images/SuggestionNavigation.svg';
-import SuggestionNavigationSelected from '@assets/images/SuggestionNavigationSelected.svg';
 import MyPageNavigation from '@assets/images/MyPageNavigation.svg';
+import SuggestionNavigation from '@assets/images/SuggestionNavigation.svg';
+import HomeNavigationSelected from '@assets/images/HomeNavigationSelected.svg';
+import BattleNavigationSelected from '@assets/images/BattleNavigationSelected.svg';
 import MyPageNavigationSelected from '@assets/images/MyPageNavigationSelected.svg';
-import { Text, View } from 'react-native';
+import SuggestionNavigationSelected from '@assets/images/SuggestionNavigationSelected.svg';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
