@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
+import { Pressable, StatusBar, StyleSheet, Text, FlatList, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, View, FlatList, Pressable, StatusBar, StyleSheet, ScrollView } from 'react-native';
-
 import Colors from 'src/constants/Colors';
-
-import TopNav from '@components/TopNav';
-
-import { SuggestionScreenProps } from '@type/params/loginStack';
-
-import Food from '@assets/images/Food.svg';
-import Coffe from '@assets/images/Coffee.svg';
-import IconAdd from '@assets/images/IconAdd.svg';
-import GiftBox from '@assets/images/GiftBox.svg';
-import Mirror from '@assets/images/HandMirror.svg';
 import CoinStack from '@assets/images/CoinStack.svg';
+import IconAdd from '@assets/images/IconAdd.svg';
+
+import Coffe from '@assets/images/Coffee.svg';
+import Food from '@assets/images/Food.svg';
+import Mirror from '@assets/images/HandMirror.svg';
+import GiftBox from '@assets/images/GiftBox.svg';
+import TopNav from '@components/TopNav';
+import { SuggestionScreenProps } from '@type/params/loginStack';
 
 interface Item {
   id: string;

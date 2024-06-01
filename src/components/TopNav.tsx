@@ -1,11 +1,11 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Pressable, StyleSheet } from 'react-native';
 
 import Colors from 'src/constants/Colors';
 
 import IconAlarm from '@assets/images/IconAlarm.svg';
 import IconHeader from '@assets/images/IconHeader.svg';
-import { useNavigation } from '@react-navigation/native';
 
 const TopNav = () => {
   const navigation = useNavigation();
