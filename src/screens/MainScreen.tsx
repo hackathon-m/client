@@ -1,10 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import MyPageScreen from './MyPage';
 import HomeScreen from './HomeScreen';
 import MyCouponScreen from './MyCoupon';
-import MyPageScreen from './MyPage';
 import SuggestionScreen from './SuggestionScreen';
+
+
 
 import { TabNavigatorParamList } from '@type/params/loginStack';
 
