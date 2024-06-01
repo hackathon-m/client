@@ -1,4 +1,5 @@
 import { login, KakaoOAuthToken } from '@react-native-seoul/kakao-login';
+import axios from 'axios';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,7 +9,22 @@ const LandingScreen = () => {
     try {
       const response: KakaoOAuthToken = await login();
 
-      console.log(response);
+      const { accessToken } = response;
+
+      const kakaoResponse = await axios.post(
+        'https://kapi.kakao.com/v2/user/me',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+
+      const id = kakaoResponse.data.id;
+      const nickname = kakaoResponse.data.kakao_account.profile.nickname;
+
+      console.log(id, nickname);
     } catch (error) {
       console.log(error);
     }

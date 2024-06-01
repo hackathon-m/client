@@ -14,7 +14,7 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
 
 function AppInner() {
-  const [loggedIn] = useState<boolean>(true);
+  const [loggedIn] = useState<boolean>(false);
 
   return loggedIn ? (
     <LogInStack.Navigator
