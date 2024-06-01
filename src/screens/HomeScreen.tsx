@@ -14,8 +14,13 @@ import IconEating from '@assets/images/IconEating.svg';
 import HomeBrowser from '@assets/images/HomeBrowser.svg';
 import MakeMyBattle from '@assets/images/MakeMyBattle.svg';
 import HomeStatistic from '@assets/images/HomeStatistic.svg';
+import { HomeScreenProps } from '@type/params/loginStack';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: HomeScreenProps) => {
+  const toCreateGiftScreen = () => {
+    navigation.navigate('CreateGiftScreen');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <TopNav />
@@ -40,7 +45,7 @@ const HomeScreen = () => {
           </View>
         </View>
         <Pressable>
-          <MakeMyBattle />
+          <MakeMyBattle onPress={toCreateGiftScreen} />
         </Pressable>
         <Pressable>
           <HomeEmpty />
