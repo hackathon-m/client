@@ -5,13 +5,20 @@ import Colors from 'src/constants/Colors';
 
 import IconAlarm from '@assets/images/IconAlarm.svg';
 import IconHeader from '@assets/images/IconHeader.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const TopNav = () => {
+  const navigation = useNavigation();
+
+  const toAlertScreen = () => {
+    navigation.navigate('AlertScreen');
+  };
+
   return (
     <View style={styles.container}>
       <IconHeader />
       <Pressable>
-        <IconAlarm />
+        <IconAlarm onPress={toAlertScreen} />
       </Pressable>
     </View>
   );

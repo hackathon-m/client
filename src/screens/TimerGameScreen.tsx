@@ -1,15 +1,29 @@
 import DefeatComponent from '@components/Defeat';
 import TopNav from '@components/TopNav';
 import VictoryComponent from '@components/Victory';
+import VictoryGiftCardComponent from '@components/VictoryGiftCard';
+import { TimerGameScreenScreenProps } from '@type/params/loginStack';
 import React, { useState, useEffect } from 'react';
 import { Text, StatusBar, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const TimerGameScreen: React.FC = () => {
+const TimerGameScreen = ({ navigation }: TimerGameScreenScreenProps) => {
   const [timer, setTimer] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [difference, setDifference] = useState<number | null>(null); // 차이를 저장하는 상태
+  const [victoryVisible, setVictoryVisible] = useState<boolean>(false);
+
+  const closeVictory = () => {
+    setVictoryVisible(true);
+  };
+
+  const toMainScreen = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainScreen' }],
+    });
+  };
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -122,8 +136,10 @@ const TimerGameScreen: React.FC = () => {
         )}
       </View>
 
-      {isFinished && <VictoryComponent />}
-      {/* {isFinished && <VictoryComponent />} */}
+      {/* {isFinished && <DefeatComponent toMainScreen={toMainScreen} />} */}
+      {isFinished && <VictoryComponent closeVictory={closeVictory} />}
+
+      {victoryVisible && <VictoryGiftCardComponent toMainScreen={toMainScreen} />}
     </SafeAreaView>
   );
 };
