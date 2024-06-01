@@ -6,9 +6,10 @@ import MainScreen from 'src/screens/MainScreen';
 import HomeScreen from 'src/screens/HomeScreen';
 import MyCouponScreen from 'src/screens/MyCoupon';
 import LandingScreen from 'src/screens/LandingScreen';
-import SuggestionScreen from 'src/screens/SuggestionScreen';
+import TimerGameScreen from 'src/screens/TimerGameScreen';
 import CreateGameScreen from 'src/screens/CreateGameScreen';
 import BallonGameScreen from 'src/screens/BallonGameScreen';
+import SuggestionScreen from 'src/screens/SuggestionScreen';
 import QuicknessGameScreen from 'src/screens/QuicknessGameScreen';
 
 import { RootStackParamList } from '@type/params/rootStack';
@@ -33,8 +34,11 @@ function AppInner() {
       <LogInStack.Screen name="MyPageScreen" component={MyPageScreen} />
       <LogInStack.Screen name="SuggestionScreen" component={SuggestionScreen} />
       <LogInStack.Screen name="CreateGameScreen" component={CreateGameScreen} />
+
       <LogInStack.Screen name="QuicknessGameScreen" component={QuicknessGameScreen} />
       <LogInStack.Screen name="BallonGameScreen" component={BallonGameScreen} />
+
+      <LogInStack.Screen name="TimerGameScreen" component={TimerGameScreen} />
     </LogInStack.Navigator>
   ) : (
     <RootStack.Navigator

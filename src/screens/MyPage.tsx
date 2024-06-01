@@ -8,6 +8,7 @@ const MyPageScreen = ({ navigation }: MyPageScreenProps) => {
   const toCreateGameScreen = () => {
     navigation.navigate('CreateGameScreen');
   };
+
   // QuicknessGameScreen으로 이동
   const toQuicknessGameScreen = () => {
     navigation.navigate('QuicknessGameScreen');
@@ -17,16 +18,25 @@ const MyPageScreen = ({ navigation }: MyPageScreenProps) => {
     navigation.navigate('BallonGameScreen');
   };
 
+  const toTimerGameScreen = () => {
+    navigation.navigate('TimerGameScreen');
+  };
+
   return (
     <SafeAreaView>
       <Pressable onPress={toCreateGameScreen}>
         <Text>게임 생성</Text>
       </Pressable>
+
       <Pressable onPress={toQuicknessGameScreen}>
         <Text>순발력 게임 이동</Text>
       </Pressable>
       <Pressable onPress={toBallonGameScreen}>
         <Text>풍선 게임 이동</Text>
+      </Pressable>
+
+      <Pressable onPress={toTimerGameScreen}>
+        <Text>타이머 게임</Text>
       </Pressable>
     </SafeAreaView>
   );
