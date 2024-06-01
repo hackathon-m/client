@@ -14,6 +14,8 @@ import QuicknessGameScreen from 'src/screens/QuicknessGameScreen';
 
 import { RootStackParamList } from '@type/params/rootStack';
 import { LoginStackParamList } from '@type/params/loginStack';
+import MakeBattleScreen from 'src/screens/MakeBattleScreen';
+
 import CreateGiftScreen from 'src/screens/CreateGiftScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -38,7 +40,7 @@ function AppInner() {
 
       <LogInStack.Screen name="QuicknessGameScreen" component={QuicknessGameScreen} />
       <LogInStack.Screen name="BallonGameScreen" component={BallonGameScreen} />
-
+      <LogInStack.Screen name="MakeBattleScreen" component={MakeBattleScreen} />
       <LogInStack.Screen name="TimerGameScreen" component={TimerGameScreen} />
       <LogInStack.Screen name="CreateGiftScreen" component={CreateGiftScreen} />
     </LogInStack.Navigator>
