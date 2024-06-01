@@ -5,12 +5,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { RootStackParamList } from '@type/params/rootStack';
 import { LoginStackParamList } from '@type/params/loginStack';
+import HomeScreen from 'src/screens/HomeScreen';
+import MyCouponScreen from 'src/screens/MyCoupon';
+import MyPageScreen from 'src/screens/MyPage';
+import SuggestionScreen from 'src/screens/SuggestionScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
 
 function AppInner() {
-  const [loggedIn] = useState<boolean>(false);
+  const [loggedIn] = useState<boolean>(true);
 
   return loggedIn ? (
     <LogInStack.Navigator
@@ -20,6 +24,10 @@ function AppInner() {
       }}
     >
       <LogInStack.Screen name="MainScreen" component={MainScreen} />
+      <LogInStack.Screen name="HomeScreen" component={HomeScreen} />
+      <LogInStack.Screen name="MyCouponScreen" component={MyCouponScreen} />
+      <LogInStack.Screen name="MyPageScreen" component={MyPageScreen} />
+      <LogInStack.Screen name="SuggestionScreen" component={SuggestionScreen} />
     </LogInStack.Navigator>
   ) : (
     <RootStack.Navigator
