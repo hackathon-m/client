@@ -14,6 +14,8 @@ export type LoginStackParamList = {
   MyPageScreen: undefined;
   HomeScreen: undefined;
   CreateGameScreen: undefined;
+  QuicknessGameScreen: undefined;
+  BallonGameScreen: undefined;
 };
 
 export type MainScreenProps = NativeStackScreenProps<LoginStackParamList, 'MainScreen'>;
