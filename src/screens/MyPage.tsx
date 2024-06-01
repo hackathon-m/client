@@ -1,11 +1,17 @@
+import { MyPageScreenProps } from '@type/params/loginStack';
 import React from 'react';
-import { Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const MyPageScreen = () => {
+const MyPageScreen = ({ navigation }: MyPageScreenProps) => {
+  const toCreateGameScreen = () => {
+    navigation.navigate('CreateGameScreen');
+  };
   return (
     <SafeAreaView>
-      <Text>마이 페이지</Text>
+      <Pressable onPress={toCreateGameScreen}>
+        <Text>게임 생성</Text>
+      </Pressable>
     </SafeAreaView>
   );
 };
