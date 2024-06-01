@@ -10,6 +10,7 @@ import MyCouponScreen from 'src/screens/MyCoupon';
 import MyPageScreen from 'src/screens/MyPage';
 import SuggestionScreen from 'src/screens/SuggestionScreen';
 import CreateGameScreen from 'src/screens/CreateGameScreen';
+import TimerGameScreen from 'src/screens/TimerGameScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
@@ -30,6 +31,7 @@ function AppInner() {
       <LogInStack.Screen name="MyPageScreen" component={MyPageScreen} />
       <LogInStack.Screen name="SuggestionScreen" component={SuggestionScreen} />
       <LogInStack.Screen name="CreateGameScreen" component={CreateGameScreen} />
+      <LogInStack.Screen name="TimerGameScreen" component={TimerGameScreen} />
     </LogInStack.Navigator>
   ) : (
     <RootStack.Navigator
