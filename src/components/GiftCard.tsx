@@ -1,6 +1,5 @@
 import React from 'react';
-import { SvgXml } from 'react-native-svg';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 
 import Colors from 'src/constants/Colors';
 
@@ -11,12 +10,16 @@ interface GiftCardProps {
   name: string;
   expiration: string;
   price: string;
+  imgurl : string;
 }
 
-const GiftCard = ({ name, expiration, price }: GiftCardProps) => {
+const GiftCard = ({ name, expiration, price, imgurl }: GiftCardProps) => {
   return (
     <View style={styles.container}>
-      <CakeDummy />
+      <Image 
+        style={styles.image}
+        source={{ uri: imgurl }} // 여기에 실제 이미지 URL을 입력하세요
+      />
       <View style={styles.bodyContainer}>
         <Text style={styles.bold16}>{name}</Text>
       </View>
@@ -35,6 +38,11 @@ const GiftCard = ({ name, expiration, price }: GiftCardProps) => {
 export default GiftCard;
 
 const styles = StyleSheet.create({
+  image: {
+    width: 200,  // 원하는 너비를 설정하세요
+    height: 200, // 원하는 높이를 설정하세요
+    resizeMode: 'cover', // 이미지 크기 조정 모드를 설정하세요 (cover, contain, stretch 등)
+  },
   container: {
     backgroundColor: '#222324',
     borderRadius: 20,
