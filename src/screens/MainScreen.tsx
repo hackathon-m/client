@@ -11,9 +11,13 @@ import SuggestionScreen from './SuggestionScreen';
 import { TabNavigatorParamList } from '@type/params/loginStack';
 
 import HomeNavigation from '@assets/images/HomeNavigation.svg';
+import HomeNavigationSelected from '@assets/images/HomeNavigationSelected.svg';
 import BattleNavigation from '@assets/images/BattleNavigation.svg';
+import BattleNavigationSelected from '@assets/images/BattleNavigationSelected.svg';
 import SuggestionNavigation from '@assets/images/SuggestionNavigation.svg';
+import SuggestionNavigationSelected from '@assets/images/SuggestionNavigationSelected.svg';
 import MyPageNavigation from '@assets/images/MyPageNavigation.svg';
+import MyPageNavigationSelected from '@assets/images/MyPageNavigationSelected.svg';
 import { Text, View } from 'react-native';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
@@ -41,7 +45,8 @@ const MainScreen = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <HomeNavigation />
+                {focused ? <HomeNavigationSelected /> : <HomeNavigation />}
+
                 <Text style={{ color: 'white', marginTop: 8 }}>홈</Text>
               </View>
             );
@@ -59,7 +64,8 @@ const MainScreen = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <BattleNavigation />
+                {focused ? <BattleNavigationSelected /> : <BattleNavigation />}
+
                 <Text style={{ color: 'white', marginTop: 8 }}>배틀</Text>
               </View>
             );
@@ -77,7 +83,8 @@ const MainScreen = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <SuggestionNavigation />
+                {focused ? <SuggestionNavigationSelected /> : <SuggestionNavigation />}
+
                 <Text style={{ color: 'white', marginTop: 8 }}>제안</Text>
               </View>
             );
@@ -95,7 +102,7 @@ const MainScreen = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <MyPageNavigation />
+                {focused ? <MyPageNavigationSelected /> : <MyPageNavigation />}
                 <Text style={{ color: 'white', marginTop: 8 }}>마이</Text>
               </View>
             );
