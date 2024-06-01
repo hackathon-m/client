@@ -41,18 +41,18 @@ const MyCouponScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
-      <TopNav />
       <ScrollView>
+        <TopNav />
         <View style={styles.titleContainer}>
-          <Text>나랑 한판 붙자!</Text>
-          <Text>나와 배틀을 제안한 유저가 있어요</Text>
+          <Text style={{ color: 'white', fontSize: 20 }}>나랑 한판 붙자!</Text>
+          <Text style={{ color: 'white', fontSize: 14 }}>나와 배틀을 제안한 유저가 있어요</Text>
         </View>
         <View style={styles.logoContainer}>
           <Image source={require('../assets/images/Sword.png')}></Image>
         </View>
         <View style={styles.suggestionContainer}>
           {battleList.map((battle) => (
-            <View style={styles.battleContainer}>
+            <View>
               <View style={styles.battle}>
                 <CouponBoxContainer
                   imageSource={''}
@@ -67,11 +67,11 @@ const MyCouponScreen = () => {
                 />
               </View>
               <View style={styles.buttonContainer}>
-                <Pressable style={{ width: 158, height: 55 }}>
-                  <Text style={{ color: 'white', fontSize: 15 }}>배틀거절</Text>
+                <Pressable style={styles.button}>
+                  <Text style={{ color: 'white', fontSize: 15 }}>✋🏻 배틀 거절</Text>
                 </Pressable>
-                <Pressable style={{ width: 158, height: 55 }}>
-                  <Text style={{ color: 'white', fontSize: 15 }}>배틀수락</Text>
+                <Pressable style={styles.button2}>
+                  <Text style={{ color: 'black', fontSize: 15 }}>💪🏻 배틀 수락</Text>
                 </Pressable>
               </View>
             </View>
@@ -88,22 +88,30 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BackgroundBlack,
   },
   //title
-  titleContainer: {},
+  titleContainer: {
+    margin: 20,
+  },
 
   //logo
-  logoContainer: {},
+  logoContainer: {
+    margin: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
   //suggestion
-  suggestionContainer: {},
-
-  battleContainer: {},
+  suggestionContainer: {
+    margin: 20,
+  },
 
   battle: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 20,
+    marginVertical: 20,
   },
 
   buttonContainer: {
@@ -111,12 +119,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 20,
   },
 
   button: {
     width: 158,
     height: 55,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#262626',
+    borderRadius: 17,
+  },
+  button2: {
+    width: 158,
+    height: 55,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#05FF00',
+    borderRadius: 17,
   },
 });
 
