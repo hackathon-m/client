@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Pressable, StatusBar, StyleSheet, Text, FlatList, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from 'src/constants/Colors';
-import CoinStack from '@assets/images/CoinStack.svg'
-import IconAdd from '@assets/images/IconAdd.svg'
+import CoinStack from '@assets/images/CoinStack.svg';
+import IconAdd from '@assets/images/IconAdd.svg';
 
- 
-import Coffe from '@assets/images/Coffee.svg'
-import Food from '@assets/images/Food.svg'
-import Mirror from '@assets/images/HandMirror.svg'
-import GiftBox from '@assets/images/GiftBox.svg'
+import Coffe from '@assets/images/Coffee.svg';
+import Food from '@assets/images/Food.svg';
+import Mirror from '@assets/images/HandMirror.svg';
+import GiftBox from '@assets/images/GiftBox.svg';
 import TopNav from '@components/TopNav';
+import { SuggestionScreenProps } from '@type/params/loginStack';
 
 interface Item {
   id: string;
@@ -24,11 +24,11 @@ interface CategoryItemProps {
   item: string;
 }
 
-const SuggestionScreen = () => {
-  const categoryList : string[] = ["App", "Food", "Cafe", "Make up"];
-  const [selectedCategory, setSelectedCategory] = useState<string | null>("App");
+const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
+  const categoryList: string[] = ['App', 'Food', 'Cafe', 'Make up'];
+  const [selectedCategory, setSelectedCategory] = useState<string | null>('App');
 
-  const DATA : Item[] = [
+  const DATA: Item[] = [
     {
       id: '1',
       title: '스타벅스',
@@ -67,11 +67,11 @@ const SuggestionScreen = () => {
 
   const renderItem = ({ item }: { item: Item }) => (
     <View style={BattleStyles.itemContainer}>
-      <Coffe style={BattleStyles.icon}/>
+      <Coffe style={BattleStyles.icon} />
       <View>
         <Text style={BattleStyles.title}>{item.title}</Text>
         <Text style={BattleStyles.descrip}>{item.descrip}</Text>
-  
+
         <View style={BattleStyles.row}>
           <Text style={BattleStyles.game}>{item.game}</Text>
           <View style={BattleStyles.row}>
@@ -79,7 +79,7 @@ const SuggestionScreen = () => {
             <Text style={BattleStyles.descrip}>{item.price}</Text>
           </View>
         </View>
-  
+
         <Pressable style={BattleStyles.sendButton}>
           <Text style={BattleStyles.buttonText}>대결신청</Text>
         </Pressable>
@@ -87,6 +87,9 @@ const SuggestionScreen = () => {
     </View>
   );
 
+  const toMakeBattleScreen = () => {
+    navigation.navigate('MakeBattleScreen');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#333444" barStyle="light-content" />
@@ -94,13 +97,12 @@ const SuggestionScreen = () => {
       <TopNav />
       {/* <Text>제안 페이지</Text> */}
 
-
       <View style={styles.categoryContainer}>
         {categoryList.map((category) => (
           <CategoryItem key={category} item={category} />
         ))}
       </View>
-      
+
       <Text style={styles.title}>Battle</Text>
 
       {/* <FlatList
@@ -114,19 +116,18 @@ const SuggestionScreen = () => {
         style={styles.pad}
         data={DATA}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
       />
 
-      <Pressable style={styles.addButton}>
+      <Pressable style={styles.addButton} onPress={toMakeBattleScreen}>
         <IconAdd />
         <Text style={styles.addButtonText}>배틀 만들기</Text>
       </Pressable>
-
     </SafeAreaView>
   );
 };
 
-const BattleStyles = StyleSheet.create( {
+const BattleStyles = StyleSheet.create({
   itemContainer: {
     borderRadius: 21,
     borderColor: Colors.deepPurple,
@@ -142,7 +143,7 @@ const BattleStyles = StyleSheet.create( {
   },
   icon: {
     marginHorizontal: 'auto',
-    width: 40
+    width: 40,
   },
   title: {
     fontFamily: 'Pretendard-Bold',
@@ -164,20 +165,20 @@ const BattleStyles = StyleSheet.create( {
     paddingBottom: 5,
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   sendButton: {
     backgroundColor: '#FFF',
     borderRadius: 10,
     paddingHorizontal: 79,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   buttonText: {
     fontFamily: 'Pretendard-Bold',
     fontSize: 14,
-     color: Colors.purple
-  }
-})
+    color: Colors.purple,
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -202,12 +203,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.green,
   },
   itemText: {
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 14,
     color: '#FFF',
   },
   title: {
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 20,
     color: '#FFF',
     marginTop: 30,
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   addButton: {
-    zIndex:3,
+    zIndex: 3,
     backgroundColor: Colors.purple,
     borderRadius: 36,
     flexDirection: 'row',
@@ -231,14 +232,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     position: 'absolute',
     bottom: 20,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   addButtonText: {
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 15,
     color: Colors.white,
     paddingLeft: 10,
-  }
+  },
 });
 
 export default SuggestionScreen;

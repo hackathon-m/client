@@ -22,6 +22,10 @@ const MyPageScreen = ({ navigation }: MyPageScreenProps) => {
     navigation.navigate('TimerGameScreen');
   };
 
+  const toMakeBattleScreen = () => {
+    navigation.navigate('MakeBattleScreen');
+  };
+
   return (
     <SafeAreaView>
       <Pressable onPress={toCreateGameScreen}>
@@ -37,6 +41,10 @@ const MyPageScreen = ({ navigation }: MyPageScreenProps) => {
 
       <Pressable onPress={toTimerGameScreen}>
         <Text>타이머 게임</Text>
+      </Pressable>
+
+      <Pressable onPress={toMakeBattleScreen}>
+        <Text>배틀 생성</Text>
       </Pressable>
     </SafeAreaView>
   );

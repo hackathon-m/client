@@ -17,7 +17,7 @@ export type LoginStackParamList = {
 
   QuicknessGameScreen: undefined;
   BallonGameScreen: undefined;
-
+  MakeBattleScreen: undefined;
   TimerGameScreen: undefined;
 };
 
@@ -27,6 +27,7 @@ export type MyCouponScreenProps = NativeStackScreenProps<LoginStackParamList, 'M
 export type SuggestionScreenProps = NativeStackScreenProps<LoginStackParamList, 'SuggestionScreen'>;
 export type MyPageScreenProps = NativeStackScreenProps<LoginStackParamList, 'MyPageScreen'>;
 export type CreateGameScreenProps = NativeStackScreenProps<LoginStackParamList, 'CreateGameScreen'>;
+export type MakeBattleScreenProps = NativeStackScreenProps<LoginStackParamList, 'MakeBattleScreen'>;
 export type TimerGameScreenScreenProps = NativeStackScreenProps<
   LoginStackParamList,
   'TimerGameScreen'
