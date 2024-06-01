@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View, Image, StatusBar, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { BattleLoadingScreenProps } from '@type/params/loginStack';
 
-const BattleLoadingScreen = () => {
+const BattleLoadingScreen = ({ navigation }: BattleLoadingScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const spinValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -14,6 +15,16 @@ const BattleLoadingScreen = () => {
       }),
     ).start();
   }, [spinValue]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        navigation.navigate('TimerGameScreen');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading, navigation]);
 
   const spin = spinValue.interpolate({
     inputRange: [0, 1],
