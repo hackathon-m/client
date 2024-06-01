@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
-import { Pressable, StatusBar, StyleSheet, Text, FlatList, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  Text,
+  View,
+  Modal,
+  FlatList,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+
 import Colors from 'src/constants/Colors';
-import CoinStack from '@assets/images/CoinStack.svg';
 
-import IconAdd from '@assets/images/IconAdd.svg';
-
-import Coffe from '@assets/images/Coffee.svg';
-import Food from '@assets/images/Food.svg';
-import Mirror from '@assets/images/HandMirror.svg';
-import GiftBox from '@assets/images/GiftBox.svg';
 import TopNav from '@components/TopNav';
+import BattleComponent from '@components/Battle';
+
 import { SuggestionScreenProps } from '@type/params/loginStack';
 
-import BattleComponent from '@components/Battle';
+import Food from '@assets/images/Food.svg';
+import Coffe from '@assets/images/Coffee.svg';
+import IconAdd from '@assets/images/IconAdd.svg';
+import GiftBox from '@assets/images/GiftBox.svg';
+import Mirror from '@assets/images/HandMirror.svg';
+import CoinStack from '@assets/images/CoinStack.svg';
 
 interface Item {
   id: string;
@@ -64,6 +74,15 @@ const dummyData: Item[] = [
 ];
 
 const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
+  const [showBattleModal, setShowBattleModal] = useState(false);
+
+  const openBattleModal = () => {
+    setShowBattleModal(true);
+  };
+
+  const closeBattleModal = () => {
+    setShowBattleModal(false);
+  };
   const categoryList: string[] = ['All', 'Food', 'Cafe', 'Make up'];
   const [selectedCategory, setSelectedCategory] = useState<string | null>('All');
 
@@ -109,9 +128,20 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
           </View>
         </View>
 
-        <Pressable style={BattleStyles.sendButton}>
-          <Text style={BattleStyles.buttonText}>대결신청</Text>
-        </Pressable>
+        <BattleComponent />
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showBattleModal}
+          onRequestClose={closeBattleModal} // Android에서 뒤로가기 버튼을 통해 모달 닫기
+        >
+          <View style={styles.modalView}>
+            <BattleComponent />
+            <Pressable onPress={closeBattleModal} style={styles.closeButton}>
+              <Text style={styles.closeButtonText}>닫기</Text>
+            </Pressable>
+          </View>
+        </Modal>
       </View>
     </View>
   );
@@ -151,8 +181,6 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
         <IconAdd />
         <Text style={styles.addButtonText}>배틀 만들기</Text>
       </Pressable>
-
-      {/* <BattleComponent /> */}
     </SafeAreaView>
   );
 };
