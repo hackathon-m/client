@@ -10,13 +10,13 @@ import TimerGameScreen from 'src/screens/TimerGameScreen';
 import CreateGameScreen from 'src/screens/CreateGameScreen';
 import BallonGameScreen from 'src/screens/BallonGameScreen';
 import SuggestionScreen from 'src/screens/SuggestionScreen';
+import MakeBattleScreen from 'src/screens/MakeBattleScreen';
+import CreateGiftScreen from 'src/screens/CreateGiftScreen';
+import GiftArchiveScreen from 'src/screens/GiftArchiveScreen';
 import QuicknessGameScreen from 'src/screens/QuicknessGameScreen';
 
 import { RootStackParamList } from '@type/params/rootStack';
 import { LoginStackParamList } from '@type/params/loginStack';
-import MakeBattleScreen from 'src/screens/MakeBattleScreen';
-
-import CreateGiftScreen from 'src/screens/CreateGiftScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const LogInStack = createNativeStackNavigator<LoginStackParamList>();
@@ -43,6 +43,7 @@ function AppInner() {
       <LogInStack.Screen name="MakeBattleScreen" component={MakeBattleScreen} />
       <LogInStack.Screen name="TimerGameScreen" component={TimerGameScreen} />
       <LogInStack.Screen name="CreateGiftScreen" component={CreateGiftScreen} />
+      <LogInStack.Screen name="GiftArchiveScreen" component={GiftArchiveScreen} />
     </LogInStack.Navigator>
   ) : (
     <RootStack.Navigator

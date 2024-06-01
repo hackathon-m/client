@@ -1,16 +1,19 @@
-import TopNav from '@components/TopNav';
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
   View,
   Text,
   StatusBar,
   Pressable,
   TextInput,
+  ScrollView,
   StyleSheet,
+  SafeAreaView,
 } from 'react-native';
+
 import Colors from 'src/constants/Colors';
+
+import TopNav from '@components/TopNav';
+
 import Gifftycoon from '@assets/images/Gifftycoon.svg';
 import Registration from '@assets/images/Registration.svg';
 
@@ -38,7 +41,7 @@ const CreateGiftScreen = () => {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: '#161B18',
+        backgroundColor: Colors.BackgroundBlack,
         flex: 1,
       }}
     >

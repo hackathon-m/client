@@ -1,17 +1,24 @@
 import React from 'react';
-import { Text, Pressable, StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View, Pressable, StatusBar, StyleSheet, ScrollView } from 'react-native';
+
+import Colors from 'src/constants/Colors';
 
 import TopNav from '@components/TopNav';
 
+import { HomeScreenProps } from '@type/params/loginStack';
+
+import Sword from '@assets/images/Sword.svg';
+import Coupon from '@assets/images/Coupon.svg';
 import UserCode from '@assets/images/UserCoode.svg';
 import CoinStack from '@assets/images/CoinStack.svg';
 import Percentage from '@assets/images/Percentage.svg';
-import Sword from '@assets/images/Sword.svg';
-import Coupon from '@assets/images/Coupon.svg';
-import Colors from 'src/constants/Colors';
 
-const MyPageScreen = () => {
+const MyPageScreen = ({ navigation }: HomeScreenProps) => {
+  // 등록한 기프티콘 클릭
+  const toGiftArchiveScreen = () => {
+    navigation.navigate('GiftArchiveScreen');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
@@ -53,7 +60,7 @@ const MyPageScreen = () => {
             <Sword />
             <Text style={styles.textNav}>배틀내역보기</Text>
           </Pressable>
-          <Pressable style={styles.navItem}>
+          <Pressable style={styles.navItem} onPress={toGiftArchiveScreen}>
             <Coupon />
             <Text style={styles.textNav}>등록한 기프티콘</Text>
           </Pressable>

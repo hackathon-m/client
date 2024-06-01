@@ -20,6 +20,7 @@ export type LoginStackParamList = {
   MakeBattleScreen: undefined;
   TimerGameScreen: undefined;
   CreateGiftScreen: undefined;
+  GiftArchiveScreen: undefined;
 };
 
 export type MainScreenProps = NativeStackScreenProps<LoginStackParamList, 'MainScreen'>;
