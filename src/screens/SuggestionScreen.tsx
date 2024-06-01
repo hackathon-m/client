@@ -3,12 +3,14 @@ import { Pressable, StatusBar, StyleSheet, Text, FlatList, View } from 'react-na
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from 'src/constants/Colors';
 import CoinStack from '@assets/images/CoinStack.svg'
+import IconAdd from '@assets/images/IconAdd.svg'
 
  
 import Coffe from '@assets/images/Coffee.svg'
 import Food from '@assets/images/Food.svg'
 import Mirror from '@assets/images/HandMirror.svg'
 import GiftBox from '@assets/images/GiftBox.svg'
+import TopNav from '@components/TopNav';
 
 interface Item {
   id: string;
@@ -18,8 +20,12 @@ interface Item {
   price: string;
 }
 
+interface CategoryItemProps {
+  item: string;
+}
+
 const SuggestionScreen = () => {
-  const categoryList = ["App", "Food", "Cafe", "Make up"];
+  const categoryList : string[] = ["App", "Food", "Cafe", "Make up"];
   const [selectedCategory, setSelectedCategory] = useState<string | null>("App");
 
   const DATA : Item[] = [
@@ -50,12 +56,9 @@ const SuggestionScreen = () => {
     setSelectedCategory(category);
   };
 
-  const categoryItem = ({ item }: { item: string }) => (
+  const CategoryItem: React.FC<CategoryItemProps> = ({ item }) => (
     <Pressable
-      style={() => [
-        styles.item,
-        selectedCategory === item && styles.selectedItem,
-      ]}
+      style={[styles.item, selectedCategory === item && styles.selectedItem]}
       onPress={() => handleCategoryPress(item)}
     >
       <Text style={styles.itemText}>{item}</Text>
@@ -88,16 +91,16 @@ const SuggestionScreen = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#333444" barStyle="light-content" />
 
+      <TopNav />
       {/* <Text>제안 페이지</Text> */}
 
-      <FlatList
-        data={categoryList}
-        renderItem={categoryItem}
-        keyExtractor={(item) => item}
-        horizontal={true}
-        extraData={selectedCategory} 
-      />
 
+      <View style={styles.categoryContainer}>
+        {categoryList.map((category) => (
+          <CategoryItem key={category} item={category} />
+        ))}
+      </View>
+      
       <Text style={styles.title}>Battle</Text>
 
       {/* <FlatList
@@ -108,11 +111,16 @@ const SuggestionScreen = () => {
       /> */}
 
       <FlatList
+        style={styles.pad}
         data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
 
+      <Pressable style={styles.addButton}>
+        <IconAdd />
+        <Text style={styles.addButtonText}>배틀 만들기</Text>
+      </Pressable>
 
     </SafeAreaView>
   );
@@ -128,12 +136,13 @@ const BattleStyles = StyleSheet.create( {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingRight: 20,
     paddingVertical: 15,
     marginBottom: 20,
   },
   icon: {
-    marginHorizontal: 'auto'
+    marginHorizontal: 'auto',
+    width: 40
   },
   title: {
     fontFamily: 'Pretendard-Bold',
@@ -173,7 +182,12 @@ const BattleStyles = StyleSheet.create( {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    backgroundColor: Colors.BackgroundBlack,
+  },
+  categoryContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   item: {
     borderRadius: 24,
@@ -197,6 +211,33 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FFF',
     marginTop: 30,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+  },
+  pad: {
+    paddingHorizontal: 20,
+  },
+  toppad: {
+    paddingTop: 20,
+    paddingHorizontal: 20,
+  },
+  addButton: {
+    zIndex:3,
+    backgroundColor: Colors.purple,
+    borderRadius: 36,
+    flexDirection: 'row',
+    paddingHorizontal: 22,
+    paddingVertical: 12,
+    marginHorizontal: 'auto',
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center'
+  },
+  addButtonText: {
+    fontFamily: "Pretendard-Bold",
+    fontSize: 15,
+    color: Colors.white,
+    paddingLeft: 10,
   }
 });
 
