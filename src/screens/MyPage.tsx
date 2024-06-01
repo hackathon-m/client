@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, Pressable, StyleSheet, View, ScrollView } from 'react-native';
+import { Text, Pressable, StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { MyPageScreenProps } from '@type/params/loginStack';
 import TopNav from '@components/TopNav';
 
 import UserCode from '@assets/images/UserCoode.svg';
@@ -14,7 +13,8 @@ import Colors from 'src/constants/Colors';
 
 const MyPageScreen = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
       <TopNav />
       <ScrollView style={styles.container}>
         <View style={styles.header}>

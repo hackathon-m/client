@@ -1,3 +1,6 @@
+import DefeatComponent from '@components/Defeat';
+import TopNav from '@components/TopNav';
+import VictoryComponent from '@components/Victory';
 import React, { useState, useEffect } from 'react';
 import { Text, StatusBar, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -60,39 +63,67 @@ const TimerGameScreen: React.FC = () => {
       style={{
         backgroundColor: '#161B18',
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
       }}
     >
-      <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
-      <Text style={{ color: 'white', fontSize: 48, marginBottom: 20 }}>{formatTime(timer)}</Text>
-      <TouchableOpacity
-        onPress={handleStartStop}
-        disabled={isFinished}
+      <TopNav />
+
+      <View
         style={{
-          backgroundColor: isFinished ? '#555' : '#1E90FF',
-          paddingVertical: 15,
-          paddingHorizontal: 30,
-          borderRadius: 10,
-          opacity: isFinished ? 0.5 : 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
-          {!isRunning && !isFinished ? '시작!' : isFinished ? '종료' : '멈춰!'}
+        <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
+
+        {!isFinished && (
+          <View
+            style={{
+              marginTop: 30,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
+              최대한 3초에 가까울떄
+            </Text>
+            <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
+              화면을 터치하세요!
+            </Text>
+          </View>
+        )}
+
+        <Text style={{ color: 'white', marginBottom: 20, fontSize: 96, fontWeight: 'bold' }}>
+          {formatTime(timer)}
         </Text>
-      </TouchableOpacity>
-      {isFinished && difference !== null && (
-        <View style={{ marginTop: 30 }}>
-          <Text style={{ color: 'white', fontSize: 36 }}>
-            {`나의 기록: ${difference === 1010 ? '1' : formatTime(Math.abs(difference))} 초`}
+        <TouchableOpacity
+          onPress={handleStartStop}
+          disabled={isFinished}
+          style={{
+            backgroundColor: isFinished ? '#555' : '#1E90FF',
+            paddingVertical: 15,
+            paddingHorizontal: 30,
+            borderRadius: 10,
+            opacity: isFinished ? 0.5 : 1,
+          }}
+        >
+          <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
+            {!isRunning && !isFinished ? '시작!' : isFinished ? '종료' : '멈춰!'}
           </Text>
-        </View>
-      )}
-      {!isFinished && (
-        <View style={{ marginTop: 30 }}>
-          <Text style={{ color: 'white', fontSize: 24 }}>{'3초에 제일 가까울 때 누르세요!'}</Text>
-        </View>
-      )}
+        </TouchableOpacity>
+        {isFinished && difference !== null && (
+          <View style={{ marginTop: 30 }}>
+            <Text style={{ color: 'white', fontSize: 36 }}>
+              {`나의 기록: ${difference === 1010 ? '1' : formatTime(Math.abs(difference))} 초`}
+            </Text>
+          </View>
+        )}
+      </View>
+
+      {isFinished && <VictoryComponent />}
+      {/* {isFinished && <VictoryComponent />} */}
     </SafeAreaView>
   );
 };
