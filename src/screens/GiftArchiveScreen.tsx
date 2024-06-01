@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, FlatList, Pressable, StyleSheet, SafeAreaView } from 'react-native';
 
 import Colors from 'src/constants/Colors';
 
 import TopNav from '@components/TopNav';
 import GiftCard from '@components/GiftCard';
+
+import axiosInstance from '@axios/axios.instance';
 
 import { GiftArchiveScreenProps } from '@type/params/loginStack';
 
@@ -28,6 +30,22 @@ const GiftArchiveScreen = ({ navigation }: GiftArchiveScreenProps) => {
   // 기프티콘 등록하기 클릭
   const toCreateGiftScreen = () => {
     navigation.navigate('CreateGiftScreen');
+  };
+
+  const [data, setData] = useState(null); // 상태를 관리할 useState 훅
+  console.log("🚀 ~ file: GiftArchiveScreen.tsx:36 ~ GiftArchiveScreen ~ data:", data)
+
+  useEffect(() => {
+    fetchData(); // 컴포넌트 마운트 시 데이터를 가져옵니다.
+  }, []); // 빈 의존성 배열을 제공하여 컴포넌트가 처음 마운트될 때만 실행되도록 합니다.
+
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get('/api/v1/gifticons'); // 데이터를 가져옵니다.
+      setData(response); // 받은 데이터를 상태로 설정
+    } catch (error) {
+      console.error('Failed to fetch data:', error); // 에러 처리
+    }
   };
 
   return (
