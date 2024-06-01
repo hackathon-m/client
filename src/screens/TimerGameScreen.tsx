@@ -1,11 +1,12 @@
-import DefeatComponent from '@components/Defeat';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View, StatusBar, TouchableOpacity } from 'react-native';
+
 import TopNav from '@components/TopNav';
 import VictoryComponent from '@components/Victory';
 import VictoryGiftCardComponent from '@components/VictoryGiftCard';
+
 import { TimerGameScreenScreenProps } from '@type/params/loginStack';
-import React, { useState, useEffect } from 'react';
-import { Text, StatusBar, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TimerGameScreen = ({ navigation }: TimerGameScreenScreenProps) => {
   const [timer, setTimer] = useState<number>(0);

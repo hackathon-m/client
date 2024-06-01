@@ -34,6 +34,12 @@ export type TimerGameScreenScreenProps = NativeStackScreenProps<
   LoginStackParamList,
   'TimerGameScreen'
 >;
+export type QuicknessGameScreenProps = NativeStackScreenProps<
+  LoginStackParamList,
+  'QuicknessGameScreen'
+>;
+export type BallonGameScreenProps = NativeStackScreenProps<LoginStackParamList, 'BallonGameScreen'>;
+
 export type CreateGiftScreenProps = NativeStackScreenProps<LoginStackParamList, 'CreateGiftScreen'>;
 export type AlertScreenProps = NativeStackScreenProps<LoginStackParamList, 'AlertScreen'>;
 export type GiftArchiveScreenProps = NativeStackScreenProps<
