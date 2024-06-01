@@ -14,6 +14,10 @@ export type LoginStackParamList = {
   MyPageScreen: undefined;
   HomeScreen: undefined;
   CreateGameScreen: undefined;
+
+  QuicknessGameScreen: undefined;
+  BallonGameScreen: undefined;
+
   TimerGameScreen: undefined;
 };
 
