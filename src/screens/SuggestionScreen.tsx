@@ -152,7 +152,7 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
         <Text style={styles.addButtonText}>배틀 만들기</Text>
       </Pressable>
 
-      <BattleComponent />
+      {/* <BattleComponent /> */}
     </SafeAreaView>
   );
 };
