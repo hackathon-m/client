@@ -54,9 +54,9 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
   useEffect(() => {
     (async () => {
       const response = await axiosInstance.get('/api/v1/rooms');
-      console.log(response.data);
-      setAllList(response.data);
-      setFilterList(response.data);
+      console.log(response.result);
+      setAllList(response.result);
+      setFilterList(response.result);
     })();
   }, []);
 
@@ -70,6 +70,7 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
 
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
+    if(allList.length == 0) return;
 
     if (category === 'All') {
       setFilterList(allList);
@@ -148,7 +149,7 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
 
       <Text style={styles.title}>Battle</Text>
       
-      {filterList.length == 0 && <Text style={styles.txtbox}>배틀을 만들어 주세요!</Text>}
+      {!filterList || filterList.length == 0 && <Text style={styles.txtbox}>배틀을 만들어 주세요!</Text>}
 
       <FlatList
         style={styles.pad}
