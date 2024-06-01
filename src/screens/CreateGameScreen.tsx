@@ -20,9 +20,12 @@ const games = [
 
 const CreateGameScreen = ({ navigation }: CreateGameScreenProps) => {
   const [selectedGame, setSelectedGame] = useState<number>(0);
+  const [text, setText] = useState('');
 
   // 게임방 만들기 클릭 시
   const toCreateGameScreen = () => {
+    if(selectedGame == 0 || text.trim() === '') return;
+
     navigation.reset({
       index: 0,
       routes: [{ name: 'MainScreen' }],
@@ -61,7 +64,11 @@ const CreateGameScreen = ({ navigation }: CreateGameScreenProps) => {
                 borderRadius: 21,
               }}
             >
-              <TextInput style={{ color: 'white' }} />
+              <TextInput 
+                value={text}
+                onChangeText={(input)=>setText(input)}
+                style={{ color: 'white' }} 
+                keyboardType="numeric"/>
             </View>
 
             <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>원</Text>
