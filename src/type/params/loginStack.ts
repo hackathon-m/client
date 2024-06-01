@@ -14,6 +14,7 @@ export type LoginStackParamList = {
   MyPageScreen: undefined;
   HomeScreen: undefined;
   CreateGameScreen: undefined;
+  TimerGameScreen: undefined;
 };
 
 export type MainScreenProps = NativeStackScreenProps<LoginStackParamList, 'MainScreen'>;
@@ -22,3 +23,7 @@ export type MyCouponScreenProps = NativeStackScreenProps<LoginStackParamList, 'M
 export type SuggestionScreenProps = NativeStackScreenProps<LoginStackParamList, 'SuggestionScreen'>;
 export type MyPageScreenProps = NativeStackScreenProps<LoginStackParamList, 'MyPageScreen'>;
 export type CreateGameScreenProps = NativeStackScreenProps<LoginStackParamList, 'CreateGameScreen'>;
+export type TimerGameScreenScreenProps = NativeStackScreenProps<
+  LoginStackParamList,
+  'TimerGameScreen'
+>;
