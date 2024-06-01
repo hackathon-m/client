@@ -20,7 +20,7 @@ export type LoginStackParamList = {
   MakeBattleScreen: undefined;
   TimerGameScreen: undefined;
   CreateGiftScreen: undefined;
-  AlertScreen: undefined;
+  GiftArchiveScreen: undefined;
 };
 
 export type MainScreenProps = NativeStackScreenProps<LoginStackParamList, 'MainScreen'>;
@@ -41,8 +41,3 @@ export type QuicknessGameScreenProps = NativeStackScreenProps<
 export type BallonGameScreenProps = NativeStackScreenProps<LoginStackParamList, 'BallonGameScreen'>;
 
 export type CreateGiftScreenProps = NativeStackScreenProps<LoginStackParamList, 'CreateGiftScreen'>;
-export type AlertScreenProps = NativeStackScreenProps<LoginStackParamList, 'AlertScreen'>;
-export type GiftArchiveScreenProps = NativeStackScreenProps<
-  LoginStackParamList,
-  'GiftArchiveScreen'
->;

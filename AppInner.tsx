@@ -14,7 +14,7 @@ import MakeBattleScreen from 'src/screens/MakeBattleScreen';
 import CreateGiftScreen from 'src/screens/CreateGiftScreen';
 import GiftArchiveScreen from 'src/screens/GiftArchiveScreen';
 import QuicknessGameScreen from 'src/screens/QuicknessGameScreen';
-
+import BattleLoadingScreen from 'src/screens/BattleLoadingScreen';
 import { RootStackParamList } from '@type/params/rootStack';
 import { LoginStackParamList } from '@type/params/loginStack';
 
@@ -47,6 +47,8 @@ function AppInner() {
       <LogInStack.Screen name="CreateGiftScreen" component={CreateGiftScreen} />
 
       <LogInStack.Screen name="GiftArchiveScreen" component={GiftArchiveScreen} />
+
+      <LogInStack.Screen name="BattleLoadingScreen" component={BattleLoadingScreen} />
 
       <LogInStack.Screen name="AlertScreen" component={AlertScreen} />
     </LogInStack.Navigator>

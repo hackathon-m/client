@@ -4,8 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CouponBoxContainer from '@components/CouponBox';
 import TopNav from '@components/TopNav';
 import Colors from 'src/constants/Colors';
+import { MyCouponScreenProps } from '@type/params/loginStack';
 
-const MyCouponScreen = () => {
+const MyCouponScreen = ({ navigation }: MyCouponScreenProps) => {
   const battleList = [
     [
       {
@@ -38,6 +39,11 @@ const MyCouponScreen = () => {
       },
     ],
   ];
+
+  //example
+  const toBattleLoadingScreen = () => {
+    navigation.navigate('BattleLoadingScreen');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
@@ -70,7 +76,7 @@ const MyCouponScreen = () => {
                 <Pressable style={styles.button}>
                   <Text style={{ color: 'white', fontSize: 15 }}>✋🏻 배틀 거절</Text>
                 </Pressable>
-                <Pressable style={styles.button2}>
+                <Pressable style={styles.button2} onPress={toBattleLoadingScreen}>
                   <Text style={{ color: 'black', fontSize: 15 }}>💪🏻 배틀 수락</Text>
                 </Pressable>
               </View>
