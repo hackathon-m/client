@@ -127,21 +127,14 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
             <Text style={BattleStyles.descrip}>{item.price}</Text>
           </View>
         </View>
-
-        <BattleComponent />
+        {/* timer, quickness, balloon 중 선택*/}
+        <BattleComponent kind="quickness" />
         <Modal
           animationType="slide"
           transparent={true}
           visible={showBattleModal}
           onRequestClose={closeBattleModal} // Android에서 뒤로가기 버튼을 통해 모달 닫기
-        >
-          <View style={styles.modalView}>
-            <BattleComponent />
-            <Pressable onPress={closeBattleModal} style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>닫기</Text>
-            </Pressable>
-          </View>
-        </Modal>
+        ></Modal>
       </View>
     </View>
   );
