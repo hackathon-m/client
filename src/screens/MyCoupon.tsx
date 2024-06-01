@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, Pressable, View, StatusBar, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CouponBoxContainer from '@components/CouponBox';
@@ -51,7 +51,7 @@ const MyCouponScreen = () => {
           <Image source={require('../assets/images/Sword.png')}></Image>
         </View>
         <View style={styles.suggestionContainer}>
-          {battleList.map((battle, index) => (
+          {battleList.map((battle) => (
             <View style={styles.battleContainer}>
               <View style={styles.battle}>
                 <CouponBoxContainer

@@ -30,36 +30,38 @@ const MakeBattleScreen = ({ navigation }: MakeBattleScreenProps) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#333444" barStyle={'light-content'} />
       <TopNav />
-      <ScrollView>
+      <ScrollView style={{ marginBottom: 20 }}>
         <View style={styles.titleContainer}>
           <Image source={require('../assets/images/Coupon.png')} />
           <Text style={styles.couponSelect}>기프티콘 선택</Text>
         </View>
 
-        <View style={styles.couponContainer}>
-          {couponList.map((coupon, index) => (
-            <Pressable
-              key={index}
-              onPress={() => handleCouponPress(index)}
-              style={[
-                styles.buttonContainer,
-                selectedCouponIndex === index && styles.selectedButtonContainer,
-              ]}
-            >
-              {selectedCouponIndex === index && (
-                <View style={styles.selectedTextContainer}>
-                  <Text style={styles.selectedText}>장전완료</Text>
+        <View style={{ paddingHorizontal: 20 }}>
+          <View style={styles.couponContainer}>
+            {couponList.map((coupon, index) => (
+              <Pressable
+                key={index}
+                onPress={() => handleCouponPress(index)}
+                style={[
+                  styles.buttonContainer,
+                  selectedCouponIndex === index && styles.selectedButtonContainer,
+                ]}
+              >
+                {selectedCouponIndex === index && (
+                  <View style={styles.selectedTextContainer}>
+                    <Text style={styles.selectedText}>장전완료</Text>
+                  </View>
+                )}
+                <View style={[selectedCouponIndex === index && styles.selectedCouponContainer]}>
+                  <CouponBoxContainer
+                    imageSource={coupon.image}
+                    text={coupon.text}
+                    price={coupon.price}
+                  />
                 </View>
-              )}
-              <View style={[selectedCouponIndex === index && styles.selectedCouponContainer]}>
-                <CouponBoxContainer
-                  imageSource={coupon.image}
-                  text={coupon.text}
-                  price={coupon.price}
-                />
-              </View>
-            </Pressable>
-          ))}
+              </Pressable>
+            ))}
+          </View>
         </View>
       </ScrollView>
 
@@ -110,7 +112,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    paddingHorizontal: 45,
   },
   buttonContainer: {
     width: 143,
