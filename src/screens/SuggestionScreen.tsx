@@ -21,47 +21,71 @@ interface Item {
   descrip: string;
   game: string;
   price: string;
+  category: string;
 }
 
 interface CategoryItemProps {
   item: string;
 }
 
-const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
-  const categoryList: string[] = ['App', 'Food', 'Cafe', 'Make up'];
-  const [selectedCategory, setSelectedCategory] = useState<string | null>('App');
 
-  const DATA: Item[] = [
-    {
-      id: '1',
-      title: '스타벅스',
-      descrip: '4,500원 부터 들어와~',
-      game: '풍선터트리기',
-      price: '4,300원',
-    },
-    {
-      id: '2',
-      title: '스타벅스',
-      descrip: '4,500원 부터 들어와~',
-      game: '풍선터트리기',
-      price: '4,300원',
-    },
-    {
-      id: '3',
-      title: '스타벅스',
-      descrip: '4,500원 부터 들어와~',
-      game: '풍선터트리기',
-      price: '4,300원',
-    },
-  ];
+const dummyData: Item[] = [
+  {
+    id: '1',
+    title: '스타벅스',
+    descrip: '4,500원 부터 들어와~',
+    game: '풍선터트리기',
+    price: '4,300원',
+    category: 'Cafe',
+  },
+  {
+    id: '2',
+    title: '스타벅스',
+    descrip: '4,500원 부터 들어와~',
+    game: '풍선터트리기',
+    price: '4,300원',
+    category: 'Food',
+  },
+  {
+    id: '3',
+    title: '스타벅스',
+    descrip: '4,500원 부터 들어와~',
+    game: '풍선터트리기',
+    price: '4,300원',
+    category: 'Make up',
+  },
+  {
+    id: '4',
+    title: '스타벅스',
+    descrip: '4,500원 부터 들어와~',
+    game: '풍선터트리기',
+    price: '4,300원',
+    category: 'etc',
+  },
+];
+
+const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
+  const categoryList: string[] = ['All', 'Food', 'Cafe', 'Make up'];
+  const [selectedCategory, setSelectedCategory] = useState<string | null>('All');
+
+  const allList: Item[] = dummyData;
+  const [filterList, setFilterList] = useState<Item[]>(dummyData);
+
 
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
+
+    if (category === 'All') {
+      setFilterList(allList);
+    } else {
+      const filteredData = allList.filter(item => item.category === category);
+      setFilterList(filteredData);
+    }
   };
 
   const CategoryItem: React.FC<CategoryItemProps> = ({ item }) => (
     <Pressable
-      style={[styles.item, selectedCategory === item && styles.selectedItem]}
+      style={selectedCategory === item ? styles.selectedItem : styles.item}
       onPress={() => handleCategoryPress(item)}
     >
       <Text style={styles.itemText}>{item}</Text>
@@ -70,7 +94,11 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
 
   const renderItem = ({ item }: { item: Item }) => (
     <View style={BattleStyles.itemContainer}>
-      <Coffe style={BattleStyles.icon} />
+      {item.category==="Cafe" && <Coffe style={BattleStyles.icon} />}
+      {item.category==="Food" && <Food style={BattleStyles.food} />}
+      {item.category==="Make up" && <Mirror style={BattleStyles.icon} />}
+      {item.category==="etc" && <GiftBox style={BattleStyles.icon} />}
+
       <View>
         <Text style={BattleStyles.title}>{item.title}</Text>
         <Text style={BattleStyles.descrip}>{item.descrip}</Text>
@@ -100,28 +128,23 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
       <TopNav />
       {/* <Text>제안 페이지</Text> */}
 
-      <ScrollView
-        style={styles.categoryContainer}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-      >
-        {categoryList.map((category) => (
-          <CategoryItem key={category} item={category} />
-        ))}
-      </ScrollView>
+      <View style={styles.categoryTop}>
+        <ScrollView
+          style={styles.categoryContainer}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
+          {categoryList.map((category) => (
+            <CategoryItem key={category} item={category} />
+          ))}
+        </ScrollView>
+      </View>
 
       <Text style={styles.title}>Battle</Text>
 
-      {/* <FlatList
-        data={categoryList}
-        renderItem={categoryItem}
-        keyExtractor={(item) => item}
-        extraData={selectedCategory} 
-      /> */}
-
       <FlatList
         style={styles.pad}
-        data={DATA}
+        data={filterList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
@@ -151,6 +174,11 @@ const BattleStyles = StyleSheet.create({
   icon: {
     marginHorizontal: 'auto',
     width: 40,
+  },
+  food: {
+    marginHorizontal: 'auto',
+    width: 40,
+    transform: [{ rotate: '-9.97deg' }],
   },
   title: {
     fontFamily: 'Pretendard-Bold',
@@ -192,10 +220,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.BackgroundBlack,
   },
+  categoryTop: {
+    height: 80
+  },
   categoryContainer: {
+    flex: 1,
+    display: 'flex',
     flexDirection: 'row',
     paddingHorizontal: 20,
     paddingTop: 20,
+    paddingBottom: 20,
   },
   item: {
     borderRadius: 24,
@@ -207,17 +241,25 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   selectedItem: {
+    borderRadius: 24,
+    borderColor: Colors.green,
+    borderWidth: 1,
+    alignItems: 'center',
+    marginRight: 10,
+    paddingHorizontal: 23,
+    paddingVertical: 8,
     backgroundColor: Colors.green,
   },
   itemText: {
+    textAlign:'center',
     fontFamily: 'Pretendard-Bold',
     fontSize: 14,
-    color: '#FFF',
+    color: Colors.white,
   },
   title: {
     fontFamily: 'Pretendard-Bold',
     fontSize: 20,
-    color: '#FFF',
+    color: Colors.white,
     marginTop: 30,
     marginBottom: 20,
     paddingHorizontal: 20,
