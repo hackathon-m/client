@@ -5,26 +5,23 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MyPageScreenProps } from '@type/params/loginStack';
 import TopNav from '@components/TopNav';
 
-import UserCode from '@assets/images/UserCoode.svg'
-import CoinStack from '@assets/images/CoinStack.svg'
-import Percentage from '@assets/images/Percentage.svg'
-import Sword from '@assets/images/Sword.svg'
-import Coupon from '@assets/images/Coupon.svg'
+import UserCode from '@assets/images/UserCoode.svg';
+import CoinStack from '@assets/images/CoinStack.svg';
+import Percentage from '@assets/images/Percentage.svg';
+import Sword from '@assets/images/Sword.svg';
+import Coupon from '@assets/images/Coupon.svg';
 import Colors from 'src/constants/Colors';
 
-
 const MyPageScreen = () => {
-
   return (
     <SafeAreaView>
       <TopNav />
       <ScrollView style={styles.container}>
-
         <View style={styles.header}>
-          <UserCode/>
+          <UserCode />
           <Text style={styles.name}>Yerang</Text>
         </View>
-      
+
         <Text style={styles.midText}>승률</Text>
         <View style={styles.percentageBox}>
           <Percentage />
@@ -62,8 +59,6 @@ const MyPageScreen = () => {
           </Pressable>
         </View>
       </ScrollView>
-
-
     </SafeAreaView>
   );
 };
@@ -76,9 +71,9 @@ const styles = StyleSheet.create({
   },
   name: {
     paddingTop: 15,
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 24,
-    color: Colors.white
+    color: Colors.white,
   },
   container: {
     backgroundColor: Colors.BackgroundBlack,
@@ -91,7 +86,7 @@ const styles = StyleSheet.create({
   },
   textBox: {
     flex: 1,
-    marginLeft: 20
+    marginLeft: 20,
   },
   flexRow: {
     flexDirection: 'row',
@@ -99,40 +94,40 @@ const styles = StyleSheet.create({
   },
   flexRowCenter: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   center: {
     marginHorizontal: 'auto',
-    margin: 6
+    margin: 6,
   },
   text: {
     color: Colors.white,
-    fontFamily: "Pretendard-Light",
+    fontFamily: 'Pretendard-Light',
     fontSize: 14,
-    margin: 4
+    margin: 4,
   },
   midText: {
     color: Colors.white,
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 16,
     padding: 20,
     paddingLeft: 92,
   },
   textBold: {
     color: Colors.white,
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 16,
   },
   textMoney: {
     color: Colors.white,
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 16,
     marginLeft: 10,
   },
   line: {
     height: 0.7,
     backgroundColor: Colors.white,
-    margin: 4
+    margin: 4,
   },
   bottom: {
     flex: 1,
@@ -154,10 +149,10 @@ const styles = StyleSheet.create({
   },
   textNav: {
     color: Colors.white,
-    fontFamily: "Pretendard-Bold",
+    fontFamily: 'Pretendard-Bold',
     fontSize: 16,
     marginTop: 10,
   },
-})
+});
 
 export default MyPageScreen;

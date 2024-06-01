@@ -10,6 +10,7 @@ import Food from '@assets/images/Food.svg';
 import Mirror from '@assets/images/HandMirror.svg';
 import GiftBox from '@assets/images/GiftBox.svg';
 import TopNav from '@components/TopNav';
+import { SuggestionScreenProps } from '@type/params/loginStack';
 
 interface Item {
   id: string;
@@ -23,7 +24,7 @@ interface CategoryItemProps {
   item: string;
 }
 
-const SuggestionScreen = () => {
+const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
   const categoryList: string[] = ['App', 'Food', 'Cafe', 'Make up'];
   const [selectedCategory, setSelectedCategory] = useState<string | null>('App');
 
@@ -86,6 +87,9 @@ const SuggestionScreen = () => {
     </View>
   );
 
+  const toMakeBattleScreen = () => {
+    navigation.navigate('MakeBattleScreen');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#333444" barStyle="light-content" />
@@ -119,7 +123,7 @@ const SuggestionScreen = () => {
         keyExtractor={(item) => item.id}
       />
 
-      <Pressable style={styles.addButton}>
+      <Pressable style={styles.addButton} onPress={toMakeBattleScreen}>
         <IconAdd />
         <Text style={styles.addButtonText}>배틀 만들기</Text>
       </Pressable>
