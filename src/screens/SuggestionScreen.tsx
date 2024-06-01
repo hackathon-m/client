@@ -3,6 +3,7 @@ import { Pressable, StatusBar, StyleSheet, Text, FlatList, View, ScrollView } fr
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from 'src/constants/Colors';
 import CoinStack from '@assets/images/CoinStack.svg';
+
 import IconAdd from '@assets/images/IconAdd.svg';
 
 import Coffe from '@assets/images/Coffee.svg';
@@ -11,6 +12,8 @@ import Mirror from '@assets/images/HandMirror.svg';
 import GiftBox from '@assets/images/GiftBox.svg';
 import TopNav from '@components/TopNav';
 import { SuggestionScreenProps } from '@type/params/loginStack';
+
+import BattleComponent from '@components/Battle';
 
 interface Item {
   id: string;
@@ -24,7 +27,6 @@ interface Item {
 interface CategoryItemProps {
   item: string;
 }
-
 
 const dummyData: Item[] = [
   {
@@ -68,14 +70,13 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
   const allList: Item[] = dummyData;
   const [filterList, setFilterList] = useState<Item[]>(dummyData);
 
-
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
 
     if (category === 'All') {
       setFilterList(allList);
     } else {
-      const filteredData = allList.filter(item => item.category === category);
+      const filteredData = allList.filter((item) => item.category === category);
       setFilterList(filteredData);
     }
   };
@@ -91,10 +92,10 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
 
   const renderItem = ({ item }: { item: Item }) => (
     <View style={BattleStyles.itemContainer}>
-      {item.category==="Cafe" && <Coffe style={BattleStyles.icon} />}
-      {item.category==="Food" && <Food style={BattleStyles.food} />}
-      {item.category==="Make up" && <Mirror style={BattleStyles.icon} />}
-      {item.category==="etc" && <GiftBox style={BattleStyles.icon} />}
+      {item.category === 'Cafe' && <Coffe style={BattleStyles.icon} />}
+      {item.category === 'Food' && <Food style={BattleStyles.food} />}
+      {item.category === 'Make up' && <Mirror style={BattleStyles.icon} />}
+      {item.category === 'etc' && <GiftBox style={BattleStyles.icon} />}
 
       <View>
         <Text style={BattleStyles.title}>{item.title}</Text>
@@ -150,6 +151,8 @@ const SuggestionScreen = ({ navigation }: SuggestionScreenProps) => {
         <IconAdd />
         <Text style={styles.addButtonText}>배틀 만들기</Text>
       </Pressable>
+
+      <BattleComponent />
     </SafeAreaView>
   );
 };
@@ -218,7 +221,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BackgroundBlack,
   },
   categoryTop: {
-    height: 80
+    height: 80,
   },
   categoryContainer: {
     flex: 1,
@@ -248,7 +251,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.green,
   },
   itemText: {
-    textAlign:'center',
+    textAlign: 'center',
     fontFamily: 'Pretendard-Bold',
     fontSize: 14,
     color: Colors.white,
