@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 
@@ -16,8 +16,16 @@ import IconEating from '@assets/images/IconEating.svg';
 import HomeBrowser from '@assets/images/HomeBrowser.svg';
 import MakeMyBattle from '@assets/images/MakeMyBattle.svg';
 import HomeStatistic from '@assets/images/HomeStatistic.svg';
+import axiosInstance from '@axios/axios.instance';
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
+  useEffect(() => {
+    (async () => {
+      const response = await axiosInstance.get('/api/v1/gameLogs');
+      console.log(response);
+    })();
+  }, []);
+
   const toCreateGiftScreen = () => {
     navigation.navigate('MakeBattleScreen');
   };
