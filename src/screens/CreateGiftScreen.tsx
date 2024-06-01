@@ -16,18 +16,33 @@ import TopNav from '@components/TopNav';
 
 import Gifftycoon from '@assets/images/Gifftycoon.svg';
 import Registration from '@assets/images/Registration.svg';
+import { RegistGifticonScreenProps } from '@type/params/loginStack';
 
 interface CategoryItemProps {
   item: string;
 }
-const CreateGiftScreen = () => {
-  const categoryList: string[] = ['App', 'Food', 'Cafe', 'Make up'];
+const CreateGiftScreen = ({ navigation }: RegistGifticonScreenProps) => {
+  const categoryList: string[] = ['Food', 'Cafe', 'Make up', 'etc'];
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>('App');
-
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [inputName, setInputName] = useState<string>('');
+  const [inputMoney, setInputMoney] = useState<string>('');
+  
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
   };
+
+  // 기프티콘 등록하기
+  const registGifticon = () => {
+    if(selectedCategory == null || inputName.trim()==='' || inputMoney.trim()==='') return;
+    
+    // 저장 후 이동
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'GiftArchiveScreen' }],
+    });
+  }
 
   const CategoryItem: React.FC<CategoryItemProps> = ({ item }) => (
     <Pressable
@@ -115,7 +130,10 @@ const CreateGiftScreen = () => {
                   borderRadius: 21,
                 }}
               >
-                <TextInput style={{ color: 'white' }} />
+                <TextInput 
+                  value={inputName}
+                  onChangeText={(input)=>setInputName(input)}
+                  style={{ color: 'white' }} />
               </View>
             </View>
           </View>
@@ -137,7 +155,11 @@ const CreateGiftScreen = () => {
                   borderRadius: 21,
                 }}
               >
-                <TextInput style={{ color: 'white' }} />
+                <TextInput 
+                  value={inputMoney}
+                  onChangeText={(input)=>setInputMoney(input)}
+                  style={{ color: 'white' }} 
+                  keyboardType="numeric"/>
               </View>
 
               <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>원</Text>
@@ -159,8 +181,9 @@ const CreateGiftScreen = () => {
               paddingVertical: 20,
               borderRadius: 27,
             }}
+            onPress={()=>{registGifticon()}}
           >
-            <Text style={{ fontWeight: '500', color: 'black', fontSize: 16 }}>
+            <Text style={{ fontWeight: 'bold', color: 'black', fontSize: 16 }}>
               기프티콘 등록하기
             </Text>
           </Pressable>
