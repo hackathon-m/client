@@ -13,18 +13,14 @@ import { GiftArchiveScreenProps } from '@type/params/loginStack';
 import IconAdd from '@assets/images/IconAdd.svg';
 import Gifftycoon1 from '@assets/images/Gifftycoon1.svg';
 
-const giftCardData = [
-  {
-    id: '1',
-    name: '투썸플레이스 스트로베리 초콜릿 생크림',
-    expiration: '2023.12.31',
-    price: '4,300원',
-  },
-  { id: '2', name: '스타벅스 바닐라 라떼', expiration: '2024.01.15', price: '5,500원' },
-  { id: '3', name: '할리스 커피 아메리카노', expiration: '2023.11.30', price: '4,000원' },
-  { id: '4', name: '메가커피 카라멜 마키아또', expiration: '2024.02.28', price: '4,500원' },
-  { id: '5', name: '커피빈 헤이즐넛 아메리카노', expiration: '2023.10.31', price: '4,800원' },
-];
+type GiftItem = {
+  id: number;
+  imageUrl: string;
+  brand: string;
+  price: number;
+  nume: string;
+  bet_earned: undefined;
+};
 
 const GiftArchiveScreen = ({ navigation }: GiftArchiveScreenProps) => {
   // 기프티콘 등록하기 클릭
@@ -33,7 +29,7 @@ const GiftArchiveScreen = ({ navigation }: GiftArchiveScreenProps) => {
   };
 
   const [data, setData] = useState(null); // 상태를 관리할 useState 훅
-  console.log("🚀 ~ file: GiftArchiveScreen.tsx:36 ~ GiftArchiveScreen ~ data:", data)
+  console.log('🚀 ~ file: GiftArchiveScreen.tsx:36 ~ GiftArchiveScreen ~ data:', data);
 
   useEffect(() => {
     fetchData(); // 컴포넌트 마운트 시 데이터를 가져옵니다.
@@ -48,6 +44,16 @@ const GiftArchiveScreen = ({ navigation }: GiftArchiveScreenProps) => {
     }
   };
 
+  const [giftCardData, setGiftCardData] = useState<GiftItem[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await axiosInstance.get('/api/v1/gifticons');
+      console.log(response.result);
+      setGiftCardData(response.result);
+    })();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <TopNav />
@@ -59,7 +65,12 @@ const GiftArchiveScreen = ({ navigation }: GiftArchiveScreenProps) => {
         horizontal
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <GiftCard name={item.name} expiration={item.expiration} price={item.price} />
+          <GiftCard
+            name={item.brand + ' ' + item.name}
+            expiration={'~2025.08.20'}
+            price={item.price}
+            imgurl={item.imageUrl}
+          />
         )}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
