@@ -6,7 +6,7 @@ import Colors from 'src/constants/Colors';
 import TopNav from '@components/TopNav';
 import GiftCard from '@components/GiftCard';
 
-import { HomeScreenProps } from '@type/params/loginStack';
+import { GiftArchiveScreenProps } from '@type/params/loginStack';
 
 import IconAdd from '@assets/images/IconAdd.svg';
 import Gifftycoon1 from '@assets/images/Gifftycoon1.svg';
@@ -24,7 +24,7 @@ const giftCardData = [
   { id: '5', name: '커피빈 헤이즐넛 아메리카노', expiration: '2023.10.31', price: '4,800원' },
 ];
 
-const GiftArchiveScreen = ({ navigation }: HomeScreenProps) => {
+const GiftArchiveScreen = ({ navigation }: GiftArchiveScreenProps) => {
   // 기프티콘 등록하기 클릭
   const toCreateGiftScreen = () => {
     navigation.navigate('CreateGiftScreen');

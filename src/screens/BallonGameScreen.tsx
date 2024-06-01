@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+
+import Colors from 'src/constants/Colors';
+
+import TopNav from '@components/TopNav';
+import DefeatComponent from '@components/Defeat';
+import VictoryComponent from '@components/Victory';
+import VictoryGiftCardComponent from '@components/VictoryGiftCard';
+
+import { BallonGameScreenProps } from '@type/params/loginStack';
 
 interface GameState {
   size: number;
@@ -9,7 +18,7 @@ interface GameState {
   gameFinished: boolean;
 }
 
-const BalloonPopGame = () => {
+const BalloonPopGame = ({ navigation }: BallonGameScreenProps) => {
   const [state, setState] = useState<GameState>({
     size: 100,
     clickCount: 0,
@@ -18,12 +27,25 @@ const BalloonPopGame = () => {
     gameFinished: false,
   });
 
+  const [isFinished, setIsFinished] = useState<boolean>(false);
+  const [victoryVisible, setVictoryVisible] = useState<boolean>(false);
+
+  const closeVictory = () => {
+    setVictoryVisible(true);
+  };
+  const toMainScreen = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainScreen' }],
+    });
+  };
+
   useEffect(() => {
     if (state.clickCount === 1) {
       setState((prevState) => ({ ...prevState, startTime: new Date().getTime() }));
     }
 
-    if (state.clickCount === 30) {
+    if (state.clickCount === 10) {
       const endTime = new Date().getTime();
       const elapsedTime = ((endTime - (state.startTime ?? endTime)) / 1000).toFixed(2);
       setState((prevState) => ({
@@ -31,7 +53,7 @@ const BalloonPopGame = () => {
         elapsedTime: elapsedTime,
         gameFinished: true,
       }));
-      setTimeout(resetGame, 5000); // 5초 후 게임 리셋
+      setIsFinished(true);
     }
   }, [state.clickCount]);
 
@@ -54,35 +76,56 @@ const BalloonPopGame = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={[
-          styles.balloon,
-          { width: state.size, height: state.size, borderRadius: state.size / 2 },
-        ]}
-        onPress={handlePress}
-        disabled={state.gameFinished}
-      >
-        <Text style={styles.clickText}>{state.clickCount}</Text>
-      </TouchableOpacity>
+    <SafeAreaView style={styles.containersafe}>
+      <TopNav />
+      {!isFinished && (
+        <>
+          <Text style={styles.instructions}>최대한 빠르게{'\n'}풍선을 터트려주세요!</Text>
+          <View style={styles.container}>
+            <TouchableOpacity
+              style={[
+                styles.balloon,
+                { width: state.size, height: state.size, borderRadius: state.size / 2 },
+              ]}
+              onPress={handlePress}
+              disabled={state.gameFinished}
+            >
+              <Text style={styles.clickText}>{state.clickCount}</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
       {state.gameFinished && (
         <View style={styles.resultContainer}>
-          <Text style={styles.resultText}>Congratulations!</Text>
-          <Text style={styles.resultText}>
-            You popped the balloon in {state.elapsedTime} seconds!
-          </Text>
+          <Text style={styles.resultText}>{state.elapsedTime} 초</Text>
         </View>
       )}
-    </View>
+      {/* {isFinished && <DefeatComponent toMainScreen={toMainScreen} />} */}
+      {isFinished && <VictoryComponent closeVictory={closeVictory} />}
+      {victoryVisible && <VictoryGiftCardComponent toMainScreen={toMainScreen} />}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  containersafe: {
+    flex: 1,
+    backgroundColor: Colors.BackgroundBlack,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: Colors.BackgroundBlack,
+    paddingBottom: 80,
+  },
+  instructions: {
+    fontSize: 20,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontFamily: 'Pretendard-Bold',
+    color: Colors.white,
+    marginTop: 65,
   },
   balloon: {
     backgroundColor: '#ff6347',
@@ -99,10 +142,12 @@ const styles = StyleSheet.create({
     top: '20%',
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   resultText: {
-    fontSize: 20,
-    color: '#333',
+    marginTop: 120,
+    fontSize: 120,
+    color: Colors.white,
     fontWeight: 'bold',
   },
 });
