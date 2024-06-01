@@ -14,7 +14,11 @@ const ReactionTimeTest = ({ navigation }: QuicknessGameScreenProps) => {
   const [startTime, setStartTime] = useState(0);
   const [buttonVisible, setButtonVisible] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 });
-  const [reactionTime, setReactionTime] = useState(0);
+  const [reactionTime, setReactionTime] = useState<number>(0);
+  console.log(
+    '🚀 ~ file: QuicknessGameScreen.tsx:18 ~ ReactionTimeTest ~ reactionTime:',
+    reactionTime,
+  );
   const [gameState, setGameState] = useState('waiting');
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const [victoryVisible, setVictoryVisible] = useState<boolean>(false);
@@ -85,7 +89,7 @@ const ReactionTimeTest = ({ navigation }: QuicknessGameScreenProps) => {
       <Text style={styles.resultText}>{gameState === 'clicked' ? ` ${reactionTime} ms` : ''}</Text>
 
       {/* {isFinished && <DefeatComponent toMainScreen={toMainScreen} />} */}
-      {isFinished && <VictoryComponent closeVictory={closeVictory} />}
+      {isFinished && <VictoryComponent closeVictory={closeVictory} reactionTime={reactionTime} />}
 
       {victoryVisible && <VictoryGiftCardComponent toMainScreen={toMainScreen} />}
     </SafeAreaView>

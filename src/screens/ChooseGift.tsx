@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Text, View, Pressable, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 
 import Colors from 'src/constants/Colors';
@@ -12,10 +13,16 @@ const couponList = [
   { image: '../assets/images/Twosome.jpg', text: '쿠퐁쿠퐁4', price: '5000원' },
 ];
 const ChooseGift = () => {
+  const navigation = useNavigation();
   const [selectedCouponIndex, setSelectedCouponIndex] = useState(null);
 
   const handleCouponPress = (index: any) => {
     setSelectedCouponIndex(index);
+  };
+
+  // 배틀 신청 버튼 클릭 시 BattleLoadingScreen으로 이동
+  const toBattleLoadingScreen = () => {
+    navigation.navigate('BattleLoadingScreen');
   };
 
   return (
@@ -55,7 +62,7 @@ const ChooseGift = () => {
         </View>
       </ScrollView>
       {/* 배틀신청 버튼 만들기 */}
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={toBattleLoadingScreen}>
         <Text style={styles.buttonText}>배틀 신청</Text>
       </Pressable>
     </SafeAreaView>
